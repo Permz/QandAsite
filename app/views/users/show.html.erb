@@ -1,8 +1,6 @@
-<h1>Users#show</h1>
-
-<h3>ユーザー名</h3>
-<%= @user.name %>
-<h3>メールアドレス</h3>
-<%= @user.email %>
-<h3>プロフィール</h3>
-<%= @user.profile%>
+<h1>会員情報</h1>
+<hr>
+<h3>ユーザー名: <small><%= @user.name %></small></h3>
+<h4>所属: <%= @user.belonging %></h4>
+<h4>自己紹介</h4>
+<p><%= @user.introduction %></p>
