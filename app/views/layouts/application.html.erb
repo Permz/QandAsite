@@ -13,11 +13,11 @@
   <!-- deviseによる追加 -->
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    
-  <!-- ログインしているかしてないかで上部のメニューの表示が変わる -->
+  <!-- ログインしているかしてないかでメニュー表示が変わる -->
     <% if user_signed_in? %>
+      <p><%= current_user.name %>さんがログインしています</p>
       <%= link_to 'プロフィール変更', edit_user_registration_path %>
-      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { confirm: "ログアウトしますか？" } %>
     <% else %>
       <%= link_to 'サインアップ', new_user_registration_path %>
       <%= link_to 'ログイン', new_user_session_path %>
