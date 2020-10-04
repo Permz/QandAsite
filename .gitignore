@@ -79,4 +79,6 @@ yarn-debug.log*
 !.vscode/extensions.json
 *.code-workspace
 
+.envrc
+
 # End of https://www.toptal.com/developers/gitignore/api/rails,vscode

@@ -13,8 +13,8 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password:
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
   socket: /tmp/mysql.sock
 
 development:
@@ -47,8 +47,8 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: QandA_production
-  username: QandA
-  password: <%= ENV['QabdA_DATABASE_PASSWORD'] %>
+# production:
+#   <<: *default
+#   database: QandA_production
+#   username: QandA
+#   password: <%= ENV['QandA_DATABASE_PASSWORD'] %>
