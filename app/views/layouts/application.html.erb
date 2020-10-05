@@ -4,28 +4,71 @@
     <title>介護情報Q&Aサイト</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-  <!-- deviseによる追加 -->
+  <body class="d-flex flex-column">
+    <!-- ナビゲーションバー -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+      <a class="navbar-brand" href="/">CareYou</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <small class="navbar-toggler-icon"></small>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">概要</a>
+          </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                相談コーナー
+              </a>
+              <div class="dropdown-menu shadow-sm" aria-labelledby="navbarDropdown">
+                <a class="nav-link ml-3" href="#">相談一覧</a>
+                <a class="nav-link ml-3" href="#">相談作成</a>
+              </div>
+            </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">ニュース</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">お問い合わせ</a>
+          </li>
+          <!-- ログインしているかしてないかでメニュー表示が変わる -->
+          <% if user_signed_in? %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                マイページ
+              </a>
+              <div class="dropdown-menu shadow-sm" aria-labelledby="navbarDropdown">
+                <%= link_to 'プロフィール', users_show_path, class: "dropdown-item" %>
+                <div class="dropdown-divider"></div>
+                <%= link_to 'ログアウト', destroy_user_session_path, class: "dropdown-item", method: :delete, data: { confirm: "ログアウトしますか？" } %>
+              </div>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to '新規会員登録', new_user_registration_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'ログイン', new_user_session_path, class: "nav-link" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+    <!-- deviseによる追加 -->
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-  <!-- ログインしているかしてないかでメニュー表示が変わる -->
-    <% if user_signed_in? %>
-      <p><%= current_user.name %>さんがログインしています</p>
-      <%= link_to 'プロフィール変更', edit_user_registration_path %>
-      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { confirm: "ログアウトしますか？" } %>
-    <% else %>
-      <%= link_to 'サインアップ', new_user_registration_path %>
-      <%= link_to 'ログイン', new_user_session_path %>
-    <% end %>
-
-    <%= yield %>
+    <div id="page-content" class="text-center">
+      <%= yield %>
+    </div>
   </body>
-  <footer>
-    <p>©︎Permz.</p>
+  <!-- フッター -->
+  <footer id="sticky-footer" class="mt-auto py-3 bg-light">
+    <div class="container text-center">
+      <small class="text-muted">Copyright©︎Permz.</small>
+    </div>
   </footer>
 </html>
