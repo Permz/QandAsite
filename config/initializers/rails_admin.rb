@@ -1,21 +1,21 @@
 RailsAdmin.config do |config|
 
-  # 一番上に追加
+  # rails_adminの認証
   config.authenticate_with do
     authenticate_or_request_with_http_basic('Site Message') do |username, password|
-      username == 'admin' && password == '0000'
+      username == 'admin' && password == 'admin'
     end
   end
   ### Popular gems integration
 
-  ## == Devise ==
-  # config.authenticate_with do
-  #   warden.authenticate! scope: :user
-  # end
-  # config.current_user_method(&:current_user)
+  ## Deviseの認証
+  config.authenticate_with do
+    warden.authenticate! scope: :user
+  end
+  config.current_user_method(&:current_user)
 
-  ## == CancanCan ==
-  # config.authorize_with :cancancan
+  ## CancanCanの承認
+  config.authorize_with :cancancan
 
   ## == Pundit ==
   # config.authorize_with :pundit
