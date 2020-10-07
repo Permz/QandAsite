@@ -56,4 +56,13 @@ class ImageUploader < CarrierWave::Uploader::Base
       name.downcase
     end
   end
+
+  def auto
+    manipulate! do|image|
+      image.auto_orient
+    end
+  end
+
+  process :auto
+
 end

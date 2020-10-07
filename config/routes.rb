@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :questions
   root to: "home#top"
   get '/' => 'home#top'
   get 'users/show'
