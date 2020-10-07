@@ -30,7 +30,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   #サムネイルを生成
   version :thumb do
-    process :resize_to_limit => [300, 300]
+    process :resize_to_fill => [200, 200, gravity = ::Magick::CenterGravity]
   end
 
   #JPGで保存
@@ -56,4 +56,13 @@ class ImageUploader < CarrierWave::Uploader::Base
       name.downcase
     end
   end
+
+  def auto
+    manipulate! do|image|
+      image.auto_orient
+    end
+  end
+
+  process :auto
+
 end
