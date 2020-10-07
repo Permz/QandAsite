@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   validates :introduction, presence: false, length: { maximum: 100 } #100文字制限
+
+  mount_uploader :image, ImageUploader
 end
