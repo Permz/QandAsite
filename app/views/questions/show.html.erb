@@ -1,19 +1,15 @@
-<p id="notice"><%= notice %></p>
-
+<h2>質問内容</h2>
+<h3>投稿者:<%= @question.user_id %></h3>
 <p>
-  <strong>Title:</strong>
+  <strong>タイトル:</strong>
   <%= @question.title %>
 </p>
 
 <p>
-  <strong>Content:</strong>
+  <strong>内容:</strong>
   <%= @question.content %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @question.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+<%= link_to '戻る', questions_path, class: "btn btn-secondary" %>
+<%= link_to '編集', edit_question_path(@question), class: "btn btn-success" %>
+<%= link_to '削除', @question, method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %>
