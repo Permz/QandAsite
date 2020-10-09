@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :news
   resources :contacts
   resources :questions
   root to: "home#top"
