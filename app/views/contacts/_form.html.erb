@@ -1,14 +1,16 @@
-<%= form_with(model: question, local: true) do |form| %>
-  <% if question.errors.any? %>
+<%= form_with(model: contact, local: true) do |form| %>
+  <% if contact.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
+      <h2><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
       <ul>
-        <% question.errors.full_messages.each do |message| %>
+        <% contact.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
+
   <div class="my-4">
     <div class="row justify-content-around">
       <div class="card text-center col-8 shadow-lg my-3">
@@ -24,5 +26,5 @@
   </div>
   <div class="container my-5">
     <hr>
-  </div>
+</div>
 <% end %>
