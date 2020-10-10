@@ -1,6 +1,6 @@
 class NewsController < ApplicationController
   before_action :set_news, only: [:show, :edit, :update, :destroy]
-  before_action :isnt_manager, only: [:new, :show, :edit, :update, :destroy]
+  before_action :isnt_manager, only: [:new, :edit, :update, :destroy] # 管理者でなければindex,showしか見られない
 
   # GET /news
   # GET /news.json
