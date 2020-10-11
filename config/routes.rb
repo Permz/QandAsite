@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
 
-  resources :news
-  resources :contacts
-  resources :questions
   root to: "home#top"
   get '/' => 'home#top'
   get 'users/show'
+
+  resources :news
+  resources :contacts
+  resources :questions
   
   devise_for :users, controllers: {
     sessions: 'users/sessions'
