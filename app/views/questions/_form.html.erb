@@ -15,6 +15,9 @@
         <h5 class="card-header">タイトル: <%= form.text_field :title %></h5>
         <div class="card-body">
           <h5 class="card-title">投稿内容: <%= form.text_area :content %></h5>
+          <p>スペースを入力することで複数のタグを付けることができます</p>
+          <p>例：音楽 文芸 スポーツ</p>
+          <%= form.text_field :category_id %>
           <div class="actions">
             <%= form.submit "投稿", class: "btn btn-success btn-lg" %>
           </div>

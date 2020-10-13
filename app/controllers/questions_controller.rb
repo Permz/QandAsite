@@ -6,11 +6,13 @@ class QuestionsController < ApplicationController
   # GET /questions.json
   def index
     @questions = Question.all
+    @category_list = Category.all
   end
 
   # GET /questions/1
   # GET /questions/1.json
   def show
+    @question_categories = @question.categories
   end
 
   # GET /questions/new
@@ -25,7 +27,8 @@ class QuestionsController < ApplicationController
   # POST /questions
   # POST /questions.json
   def create
-    @question = Question.new(question_params)
+    @question = current_user.questions.new(question_params)
+    category_list = params[:question][:category_id].split(nil)
     @question.user_id = current_user.id
     @question.title = params[:question][:title]
     @question.content = params[:question][:content]
@@ -33,6 +36,7 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
+        @question.save_category(category_list)
         format.html { redirect_to @question, notice: '投稿に成功しました！' }
         format.json { render :show, status: :created, location: @question }
       else

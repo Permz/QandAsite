@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'category/new'
   root to: "home#top"
   get '/' => 'home#top'
   get 'users/show'
