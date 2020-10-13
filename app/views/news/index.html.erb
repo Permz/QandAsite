@@ -1,6 +1,7 @@
 <h1>ニュース一覧</h1>
 
-<% @news.each do |news| %>
+<%= will_paginate @newss, list_classes: %w(pagination justify-content-center), :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
+<% @newss.each do |news| %>
   <div class="row justify-content-around">
     <div class="card text-center col-6 shadow-lg my-5">
       <h5 class="card-header">タイトル：<%= news.title %></h5>
@@ -12,6 +13,7 @@
     </div>
   </div>
 <% end %>
+<%= will_paginate @newss, list_classes: %w(pagination justify-content-center), :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
 
 <div class="container my-5">
   <hr>

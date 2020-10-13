@@ -1,5 +1,7 @@
 <h1 class="mb-5">相談一覧</h1>
 
+
+<%= will_paginate @questions, list_classes: %w(pagination justify-content-center), :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
 <% @questions.each do |question| %>
   <div class="row justify-content-around">
     <div class="card text-center col-6 shadow-lg my-5">
@@ -13,6 +15,7 @@
     </div>
   </div>
 <% end %>
+<%= will_paginate @questions, list_classes: %w(pagination justify-content-center), :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
 
 <div class="container my-5">
   <hr>
