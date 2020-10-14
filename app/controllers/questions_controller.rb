@@ -6,7 +6,6 @@ class QuestionsController < ApplicationController
   # GET /questions.json
   def index
     @questions = Question.paginate(page: params[:page], per_page: 6)
-    @category_list = Category.all
   end
 
   # GET /questions/1
