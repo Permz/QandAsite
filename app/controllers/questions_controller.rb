@@ -6,7 +6,6 @@ class QuestionsController < ApplicationController
   # GET /questions.json
   def index
     @questions = Question.all
-    @category_list = Category.all
   end
 
   # GET /questions/1

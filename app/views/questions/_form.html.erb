@@ -15,11 +15,16 @@
         <h5 class="card-header">タイトル: <%= form.text_field :title %></h5>
         <div class="card-body">
           <h5 class="card-title">投稿内容: <%= form.text_area :content %></h5>
-          <p>スペースを入力することで複数のタグを付けることができます</p>
-          <p>例：音楽 文芸 スポーツ</p>
-          <%= form.text_field :category_id %>
+          <h5 class="container">タグ:
+            <%= form.collection_check_boxes :category_ids, Category.all, :id, :name, include_hidden: false do |category| %>
+              <div class="check-box">
+                <%= category.check_box %>
+                <%= category.label { category.text } %>
+              </div>
+            <% end %>
+          </h5>
           <div class="actions">
-            <%= form.submit "投稿", class: "btn btn-success btn-lg" %>
+            <%= form.submit "投稿", class: "btn btn-success btn-lg my-3" %>
           </div>
         </div>
       </div>

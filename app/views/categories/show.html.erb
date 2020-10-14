@@ -1,0 +1,19 @@
+<h1>カテゴリー: <%= @category.name %></h1>
+
+<% @questions.each do |question| %>
+  <div class="row justify-content-around">
+    <div class="card text-center col-6 shadow-lg my-5">
+      <h5 class="card-header">タイトル：<%= question.title %></h5>
+      <div class="card-body">
+        <h5 class="card-title"><%= question.content %></h5>
+        <% question.categories.each do |category| %>
+          <span>
+            <%= link_to category.name, category_path(id: category.id), class: "badge badge-pill badge-secondary" %>
+          </span>
+        <% end %>
+        <p class="card-text text-right text-muted">投稿者：<%= question.user.name %></p>
+        <%= link_to '詳細', question, class: "btn btn-info btn-lg" %>
+      </div>
+    </div>
+  </div>
+<% end %>

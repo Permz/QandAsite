@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'category/new'
   root to: "home#top"
   get '/' => 'home#top'
   get 'users/show'
@@ -8,6 +7,7 @@ Rails.application.routes.draw do
   resources :news
   resources :contacts
   resources :questions
+  resources :categories
   
   devise_for :users, controllers: {
     sessions: 'users/sessions'
