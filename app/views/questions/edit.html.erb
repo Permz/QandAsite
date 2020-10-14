@@ -2,5 +2,6 @@
 
 <%= render 'form', question: @question %>
 
-<%= link_to '詳細', @question %>
-<%= link_to '戻る', questions_path %>
+<div class="container mb-5">
+  <%= link_to '戻る', questions_path, class: "btn btn-secondary btn-lg" %>
+</div>

@@ -4,5 +4,6 @@ class CreateQuestionCategories < ActiveRecord::Migration[6.0]
       t.integer :question_id
       t.integer :category_id
     end
+    add_index :categories, :name, unique: true
   end
 end

@@ -27,15 +27,14 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = current_user.questions.new(question_params)
-    category_list = params[:question][:category_id].split(nil)
-    @question.user_id = current_user.id
-    @question.title = params[:question][:title]
-    @question.content = params[:question][:content]
+    @category_ids = @question.categories.pluck(:id)
     @question.save
 
     respond_to do |format|
       if @question.save
-        @question.save_category(category_list)
+        @category_ids.each do |category_id|
+          category_id.save
+        end
         format.html { redirect_to @question, notice: '投稿に成功しました！' }
         format.json { render :show, status: :created, location: @question }
       else
@@ -77,6 +76,6 @@ class QuestionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def question_params
-      params.require(:question).permit(:title, :content, :user_id)
+      params.require(:question).permit(:title, :content, :user_id, category_ids: [])
     end
 end

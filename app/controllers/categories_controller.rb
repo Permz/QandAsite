@@ -23,14 +23,7 @@ class CategoriesController < ApplicationController
     end
   end
 
-
-
-  def update
-    
-  end
-
   def show
-    @question = Question.find(params[:id])
     @category = Category.find(params[:id])
     @questions = @category.questions
   end
