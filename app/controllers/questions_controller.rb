@@ -12,6 +12,8 @@ class QuestionsController < ApplicationController
   # GET /questions/1.json
   def show
     @question_categories = @question.categories
+    @comments = @question.comments
+    @comment = current_user.comments.new
   end
 
   # GET /questions/new

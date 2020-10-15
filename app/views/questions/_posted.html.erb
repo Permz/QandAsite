@@ -1,0 +1,19 @@
+
+
+<h2 class="my-5">相談へのコメント</h2>
+
+<div class="container justify-content-center">
+  <div class="row">
+    <% @question.comments.each do |comment| %>
+      <div class="col mb-3">
+        <div class="card text-center shadow-lg my-5 h-75" style="height: 300px;">
+          <div class="card-body my-3">
+            <h5 class="card-title"><%= comment.content %></h5>
+            <p class="card-text text-right text-muted">投稿者：<%= comment.user.name %></p>
+            <%= link_to '詳細', comment, class: "btn btn-info btn-lg" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
