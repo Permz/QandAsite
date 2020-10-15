@@ -12,8 +12,9 @@ class QuestionsController < ApplicationController
   # GET /questions/1.json
   def show
     @question_categories = @question.categories
+    @user = @question.user
+    @comment = @question.comments.build
     @comments = @question.comments
-    @comment = current_user.comments.new
   end
 
   # GET /questions/new
@@ -30,7 +31,6 @@ class QuestionsController < ApplicationController
   def create
     @question = current_user.questions.new(question_params)
     @category_ids = @question.categories.pluck(:id)
-    @question.save
 
     respond_to do |format|
       if @question.save

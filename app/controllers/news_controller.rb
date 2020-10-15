@@ -1,6 +1,6 @@
 class NewsController < ApplicationController
   before_action :set_news, only: [:show, :edit, :update, :destroy]
-  before_action :isnt_manager, only: [:new, :edit, :update, :destroy] # 管理者でなければindex,showしか見られない
+  before_action :not_manager, only: [:new, :edit, :update, :destroy] # 管理者でなければindex,showしか見られない
 
   # GET /news
   # GET /news.json
@@ -73,7 +73,7 @@ class NewsController < ApplicationController
       params.require(:news).permit(:title, :content, :user_id)
     end
 
-    def isnt_manager
+    def not_manager
       current_user.admin_flg == false
     end
 end
