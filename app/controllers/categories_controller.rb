@@ -12,7 +12,6 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-    @category.save
     respond_to do |format|
       if @category.save
         format.html { redirect_to @category, notice: 'カテゴリー追加に成功しました！' }

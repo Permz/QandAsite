@@ -6,7 +6,9 @@ Rails.application.routes.draw do
 
   resources :news
   resources :contacts
-  resources :questions
+  resources :questions do
+    resources :comments, only: [:create]
+  end
   resources :categories
   
   devise_for :users, controllers: {
