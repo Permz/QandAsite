@@ -15,6 +15,11 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
+  # ゲストログイン機能
+  devise_scope :user do
+    post 'users/guest' => 'users/sessions#guest_login'
+  end
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   
 end
