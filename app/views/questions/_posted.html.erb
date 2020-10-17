@@ -3,7 +3,7 @@
 
 <div class="container justify-content-center">
   <div class="row row-col-1">
-    <% @comments.each do |comment| %>
+    <% @question.comments.each do |comment| %>
       <div class="col mb-3">
         <div class="card text-center shadow-lg my-5 h-75" style="height: 300px;">
           <div class="card-body my-3">
@@ -18,6 +18,10 @@
               <% end %>
             </div>
             <p class="card-text text-right text-muted">投稿者：<%= comment.user.name unless comment.user.blank? %></p>
+            <hr>
+            <% if current_user == comment.user %>
+              <%= link_to "コメント削除", question_comment_path(@question, comment), method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger btn-sm' %>
+            <% end %>
           </div>
         </div>
       </div>

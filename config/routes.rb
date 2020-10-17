@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :news
   resources :contacts
   resources :questions do
-    resources :comments, only: [:create]
+    resources :comments
   end
   resources :categories
   

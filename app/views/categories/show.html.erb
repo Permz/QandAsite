@@ -1,5 +1,7 @@
 <h1>カテゴリー: <%= @category.name %></h1>
 
+<%= link_to '新規相談作成', new_question_path, class: "btn btn-success btn-lg my-3" %>
+
 <% @questions.each do |question| %>
   <div class="row justify-content-around">
     <div class="card text-center col-6 shadow-lg my-5">
