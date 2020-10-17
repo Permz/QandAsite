@@ -9,13 +9,11 @@
           <h5 class="card-header">タイトル：<%= question.title %></h5>
           <div class="card-body">
             <h5 class="card-title"><%= question.content %></h5>
-              <h5>タグ:
-                <% question.categories.each do |category| %>
-                  <span>
-                    <%= link_to category.name, category_path(id: category.id), class: "badge badge-pill badge-secondary" %>
-                  </span>
-                <% end %>
-              </h5>
+              <% question.categories.each do |category| %>
+                <h5><span>
+                  <%= link_to category.name, category_path(id: category.id), class: "badge badge-pill badge-secondary" %>
+                </span></h5>
+              <% end %>
             <p class="card-text text-right text-muted">投稿者：<%= question.user.name %></p>
             <%= link_to '詳細', question, class: "btn btn-info btn-lg" %>
           </div>
@@ -30,8 +28,12 @@
   <hr>
 </div>
 
-<%= link_to 'カテゴリー一覧', categories_path, class: "btn btn-lg btn-warning" %>
+<%= link_to 'カテゴリー一覧', categories_path, class: "btn btn-lg btn-primary mr-2" %>
+<%= link_to 'カテゴリー作成', new_category_path, class: "btn btn-lg btn-warning" %>
 
 <div class="container my-5">
   <%= link_to '新規質問作成', new_question_path, class: "btn btn-success btn-lg" %>
+  <% unless user_signed_in? %>
+    <h5 class="my-2 font-italic text-muted">ログインするとコメントできます</h5>
+  <% end %>
 </div>

@@ -14,7 +14,7 @@ class QuestionsController < ApplicationController
     @question_categories = @question.categories
     @user = @question.user
     @comment = @question.comments.build
-    # @comments = @question.comments
+
   end
 
   # GET /questions/new
