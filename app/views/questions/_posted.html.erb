@@ -7,7 +7,7 @@
       <div class="col mb-3">
         <div class="card text-center shadow-lg my-5 h-75" style="height: 300px;">
           <div class="card-body my-3">
-            <h5 class="card-title"><%= comment.content %></h5>
+            <h5 class="card-text"><%= comment.content %></h5>
             <div class="container mb-3">
               <% if @user.image? %>
                 <%= image_tag @user.image.thumb.url %>
