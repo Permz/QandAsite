@@ -12,7 +12,7 @@
   <div class="container justify-content-around">
     <div class="row text-center">
       <div class="card shadow-lg my-3 h-75" style="height: 900px; width: 1600px;">
-        <h5 class="card-header">タイトル: <%= form.text_field :title %></h5>
+        <h5 class="card-header">タイトル: <div class="form-group"><%= form.text_field :title, class: "form-control col-4", placeholder: "タイトル" %></div></h5>
         <div class="card-body">
           <h5 class="card-title">投稿内容: <%= form.text_area :content %></h5>
           <h5 class="container">タグ:
