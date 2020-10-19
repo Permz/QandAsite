@@ -23,6 +23,15 @@
               <%= link_to "コメント削除", question_comment_path(@question, comment), method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger btn-sm' %>
             <% end %>
           </div>
+          <div class="text-center disabled<%= "disabled" if @question.best_flg != false %>">
+            <%= button_to "ベストコメント！", { controller: 'questions', action: 'update' },
+              { method: :put, params: { question: { title: @question.title,
+                                                    content: @question.content,
+                                                    user_id: @question.user_id,
+                                                    best_flg: true
+              }}}
+            %>
+          </div>
         </div>
       </div>
     <% end %>

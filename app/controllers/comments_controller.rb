@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
         format.html { redirect_to question, notice: '投稿に成功しました！' }
         format.json { render :show, status: :created, location: @question }
       else
-        format.html { render :new }
+        format.html { redirect_to question, alert: '投稿に失敗しました' }
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
