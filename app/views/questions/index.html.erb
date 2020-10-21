@@ -6,7 +6,11 @@
     <% @questions.each do |question| %>
       <div class="col mb-3">
         <div class="card text-center shadow-lg my-5 h-75" style="height: 300px;">
-          <h5 class="card-header">タイトル：<%= question.title %></h5>
+          <h5 class="card-header">タイトル：<%= question.title %>
+          <% if question.best_answer_id %>
+            <span class="badge font-italic", style="color: red;" >解決済み</span>
+          <% end %>
+          </h5>
           <div class="card-body">
             <h5 class="card-title"><%= question.content %></h5>
               <% question.categories.each do |category| %>

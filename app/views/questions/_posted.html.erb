@@ -7,11 +7,14 @@
       <% if comment.content? %>
         <div class="col mb-3">
           <div class="card text-center shadow-lg my-5 h-75" style="height: 300px;">
-            <div class="card-body my-3">
+            <div class="card-body mt-3">
+            <% if @question.best_answer_id == comment.id %>
+              <strong>⭐︎ベストコメント⭐︎</strong><br>
+            <% end %>
               <h5 class="card-text"><%= comment.content %></h5>
-              <div class="container mb-3">
+              <div class="container">
                 <% if @user.image? %>
-                  <%= image_tag @user.image.thumb.url %>
+                  <%= image_tag @user.image.mini.url %>
                 <% else %>
                   <!--
                     image_tag "noimage.gif" 
@@ -21,18 +24,23 @@
               <p class="card-text text-right text-muted">投稿者：<%= comment.user.name unless comment.user.blank? %></p>
               <hr>
               <% if current_user == comment.user %>
-                <%= link_to "コメント削除", question_comment_path(@question, comment), method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger btn-sm' %>
+                <%= link_to_unless @question.best_answer_id, "コメント削除", question_comment_path(@question, comment), method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger btn-sm' %>
               <% end %>
             </div>
-          </div>
-          <div class="text-center disabled<%= "disabled" if @question.best_flg != false %>">
-            <%= button_to "ベストコメント！", { controller: 'questions', action: 'update' },
-              { method: :put, params: { question: { title: @question.title,
-                                                    content: @question.content,
-                                                    user_id: @question.user_id,
-                                                    best_flg: true
-              }}}
-            %>
+            <% if @question.user == current_user %>
+              <div class="text-center disabled<%= "disabled" if @question.best_answer_id != nil %>">
+                <%= button_to "ベストコメント！", { controller: 'questions', action: 'update' },
+                  { method: :put, class: "btn btn-warning btn-sm mb-4", params: { question: { title: @question.title,
+                                                                                              content: @question.content,
+                                                                                              user_id: @question.user_id,
+                                                                                              best_answer_id: comment.id
+                  }},
+                  disabled: @question.best_answer_id,
+                  data: { confirm: "#{ User.find_by(id: comment.user_id).name }さんの回答をベストコメントにします。この修正は変更できませんが、よろしいですか？" }
+                  }
+                %>
+              </div>
+            <% end %>
           </div>
         </div>
       <% end %>
