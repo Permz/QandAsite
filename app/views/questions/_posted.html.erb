@@ -1,27 +1,29 @@
 
 <h2 class="my-5">相談へのコメント</h2>
-<% if @comment.content? %>
+
 <div class="container justify-content-center">
   <div class="row row-cols-1 row-cols-md-2">
     <% @question.comments.each do |comment| %>
-      <div class="col mb-3">
-        <div class="card text-center shadow-lg my-5 h-75" style="height: 300px;">
-          <div class="card-body my-3">
-            <h5 class="card-text"><%= comment.content %></h5>
-            <div class="container mb-3">
-              <% if @user.image? %>
-                <%= image_tag @user.image.thumb.url %>
-              <% else %>
-                <!--
-                  image_tag "noimage.gif" 
-                -->
+      <% if comment.content? %>
+        <div class="col mb-3">
+          <div class="card text-center shadow-lg my-5 h-75" style="height: 300px;">
+            <div class="card-body my-3">
+              <h5 class="card-text"><%= comment.content %></h5>
+              <div class="container mb-3">
+                <% if @user.image? %>
+                  <%= image_tag @user.image.thumb.url %>
+                <% else %>
+                  <!--
+                    image_tag "noimage.gif" 
+                  -->
+                <% end %>
+              </div>
+              <p class="card-text text-right text-muted">投稿者：<%= comment.user.name unless comment.user.blank? %></p>
+              <hr>
+              <% if current_user == comment.user %>
+                <%= link_to "コメント削除", question_comment_path(@question, comment), method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger btn-sm' %>
               <% end %>
             </div>
-            <p class="card-text text-right text-muted">投稿者：<%= comment.user.name unless comment.user.blank? %></p>
-            <hr>
-            <% if current_user == comment.user %>
-              <%= link_to "コメント削除", question_comment_path(@question, comment), method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger btn-sm' %>
-            <% end %>
           </div>
           <div class="text-center disabled<%= "disabled" if @question.best_flg != false %>">
             <%= button_to "ベストコメント！", { controller: 'questions', action: 'update' },
@@ -33,10 +35,7 @@
             %>
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>
-<% else %>
-  <h5 class="text-center font-italic text-muted">コメントしてみましょう！</h5>
-<% end %>
