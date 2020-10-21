@@ -20,8 +20,9 @@
           <% end %>
         </div>
         <% if current_user.id == @question.user_id %>
-          <%= link_to '編集', edit_question_path(@question), class: "btn btn-success mx-2" %>
-          <%= link_to '削除', @question, method: :delete, class: "btn btn-danger mx-2", data: { confirm: '削除しますか?' } %>
+          <hr>
+          <%= link_to_unless @question.best_answer_id, "編集", edit_question_path(@question), class: "btn btn-success mx-2" %>
+          <%= link_to_unless @question.best_answer_id, "削除", @question, method: :delete, class: "btn btn-danger mx-2", data: { confirm: '削除しますか?' } %>
         <% end %>
       </div>
     </div>
@@ -38,13 +39,13 @@
   <hr>
 </div>
 
-<h2 class="my-5">コメントする</h2>
-
-<%= render 'comments', question: @question %>
-
-<div class="container my-5">
+<% unless @question.best_answer_id %>
+  <h2 class="my-5">コメントする</h2>
+  <%= render 'comments', question: @question %>
+  <div class="container my-5">
   <hr>
 </div>
+<% end %>
 
 <div class="container my-4">
   <%= link_to '相談一覧', questions_path, class: "btn btn-secondary mx-2 btn-lg" %>

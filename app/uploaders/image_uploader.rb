@@ -33,6 +33,11 @@ class ImageUploader < CarrierWave::Uploader::Base
     process :resize_to_fill => [120, 120]
   end
 
+  # miniアイコンを生成
+  version :mini do
+    process :resize_to_fill => [40, 40]
+  end
+
   #JPGで保存
   process :convert => 'jpg'
 
