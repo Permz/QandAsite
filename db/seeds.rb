@@ -13,3 +13,5 @@ Category.create(:name => "訪問介護")
 Category.create(:name => "デイ")
 Category.create(:name => "サ高住")
 Category.create(:name => "在宅介護")
+
+News.create(:title => "【祝】CareYou開設！", :content => "CareYouが無事に開設されました！これからよろしくお願いいたします。", :user_id => "1")
