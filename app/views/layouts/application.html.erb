@@ -18,7 +18,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">概要</a>
+            <a class="nav-link" href="/about">概要</a>
           </li>
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -63,12 +63,12 @@
       </div>
     </nav>
     <!-- deviseによる追加 -->
-    <%= notice %><br>
-    <%= alert %>
+    <%= notice %><%= alert %>
     <div id="page-content" class="text-center">
       <%= yield %>
     </div>
   </body>
+
   <!-- フッター -->
   <footer id="sticky-footer" class="mt-auto py-3 bg-light">
     <div class="container text-center">

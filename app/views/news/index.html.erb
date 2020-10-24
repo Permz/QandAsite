@@ -1,4 +1,6 @@
-<h1>ニュース一覧</h1>
+<div class="container my-3">
+  <h1>ニュース一覧</h1>
+</div>
 
 <%= will_paginate @newss, list_classes: %w(pagination justify-content-center), :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
 <% @newss.each do |news| %>
