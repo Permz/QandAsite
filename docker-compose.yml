@@ -1,0 +1,27 @@
+version: '3'
+
+volumes:
+  db:
+
+services:
+  web:
+    build: .
+    ports:
+      - '3000:3000'
+    volumes:
+      - '.:/app'
+    environment:
+      - 'DATABASE_PASSWORD= '
+    tty: true
+    stdin_open: true
+    depends_on:
+      - db
+    links:
+      - db
+
+  
+  db:
+    image: mysql
+    volumes:
+      - './db:/var/lib/mysql'
+
