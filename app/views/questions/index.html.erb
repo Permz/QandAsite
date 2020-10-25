@@ -1,4 +1,6 @@
-<h1 class="mb-5">相談一覧</h1>
+<div class="container my-3">
+  <h1 class="mb-5">相談一覧</h1>
+</div>
 
 <%= will_paginate @questions, list_classes: %w(pagination justify-content-center), :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
 <div class="container justify-content-center">
@@ -8,7 +10,7 @@
         <div class="card text-center shadow-lg my-5 h-75" style="height: 300px;">
           <h5 class="card-header">タイトル：<%= question.title %>
           <% if question.best_answer_id %>
-            <span class="badge font-italic", style="color: red;" >解決済み</span>
+            <span class="badge font-italic" style="color: red;" >解決済み</span>
           <% end %>
           </h5>
           <div class="card-body">

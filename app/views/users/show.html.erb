@@ -1,19 +1,21 @@
-<h1>会員情報</h1>
+<div class="container my-3">
+  <h1>会員情報</h1>
+</div>
+
 <% if @user.admin_flg? %>
   <small class="font-italic">管理者です</small>
   <br>
 <% end %>
 <hr>
+
 <div class="container my-4 font-italic">
   <% if @user.image? %>
     <%= image_tag @user.image.thumb.url %>
   <% else %>
     <p>画像がありません</p>
-    <!--
-      = image_tag "noimage.gif" 
-    -->
   <% end %>
 </div>
+
 <h4>ユーザー名: <small><%= @user.name %></small></h4>
 <hr>
 <h4>所属: <small><%= @user.belonging %></small></h4>
