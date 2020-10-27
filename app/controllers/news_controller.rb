@@ -2,6 +2,8 @@ class NewsController < ApplicationController
   before_action :set_news, only: [:show, :edit, :update, :destroy]
   before_action :not_manager, only: [:new, :edit, :update, :destroy] # 管理者でなければindex,showしか見られない
 
+  add_breadcrumb "ニュース一覧", :news_index_path
+
   # GET /news
   # GET /news.json
   def index
@@ -11,6 +13,7 @@ class NewsController < ApplicationController
   # GET /news/1
   # GET /news/1.json
   def show
+    add_breadcrumb "ニュース詳細", :news_path
   end
 
   # GET /news/new

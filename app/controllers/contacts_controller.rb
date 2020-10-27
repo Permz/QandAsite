@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:show,:new]
+  before_action :authenticate_user!, only: [:show, :new]
 
   # GET /contacts
   # GET /contacts.json
@@ -16,6 +16,7 @@ class ContactsController < ApplicationController
   # GET /contacts/new
   def new
     @contact = Contact.new
+    add_breadcrumb "お問い合わせ", :new_contact_path
   end
 
   # GET /contacts/1/edit
@@ -29,7 +30,7 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
+        format.html { redirect_to @contact, notice: 'お問い合わせの投稿に成功しました！' }
         format.json { render :show, status: :created, location: @contact }
       else
         format.html { render :new }

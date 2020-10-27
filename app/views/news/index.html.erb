@@ -2,6 +2,12 @@
   <h1>ニュース一覧</h1>
 </div>
 
+<div class="container">
+  <ol class="breadcrumb">
+    <%= render_breadcrumbs :tag => :li, :separator => " / " %>
+  </ol>
+</div>
+
 <%= will_paginate @newss, list_classes: %w(pagination justify-content-center), :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
 <% @newss.each do |news| %>
   <div class="row justify-content-around">

@@ -2,6 +2,12 @@
   <h1 class="mb-5">相談一覧</h1>
 </div>
 
+<div class="container">
+  <ol class="breadcrumb">
+    <%= render_breadcrumbs :tag => :li, :separator => " / " %>
+  </ol>
+</div>
+
 <%= will_paginate @questions, list_classes: %w(pagination justify-content-center), :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
 <div class="container justify-content-center">
   <div class="row row-cols-1 row-cols-md-2">

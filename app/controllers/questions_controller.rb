@@ -2,6 +2,8 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:show, :new]
 
+  add_breadcrumb "相談一覧", :questions_path
+
   # GET /questions
   # GET /questions.json
   def index
@@ -14,15 +16,18 @@ class QuestionsController < ApplicationController
     @question_categories = @question.categories
     @user = @question.user
     @comment = @question.comments.build
+    add_breadcrumb "質問詳細", :question_path
   end
 
   # GET /questions/new
   def new
     @question = Question.new
+    add_breadcrumb "質問作成", :new_question_path
   end
 
   # GET /questions/1/edit
   def edit
+    add_breadcrumb "質問編集", :edit_question_path
   end
 
   # POST /questions

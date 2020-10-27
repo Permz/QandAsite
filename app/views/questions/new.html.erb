@@ -2,6 +2,12 @@
   <h1>新規相談作成</h1>
 </div>
 
+<div class="container">
+  <ol class="breadcrumb">
+    <%= render_breadcrumbs :tag => :li, :separator => " / " %>
+  </ol>
+</div>
+
 <%= render 'form', question: @question %>
 
 <%= link_to '戻る', questions_path, class: "btn btn-secondary my-3 btn-lg" %>
