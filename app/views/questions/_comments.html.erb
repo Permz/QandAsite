@@ -1,7 +1,7 @@
 <div class="container justify-content-around">
   <%= form_with(model: [@question, @comment], local: true) do |form| %>
     <div class="row text-center">
-      <div class="card shadow-lg mt-3 h-75" style="height: 900px; width: 1600px;">
+      <div class="card shadow-sm mt-3 h-75" style="height: 900px; width: 1600px;">
         <div class="card-body my-3">
           <h5 class="card-title">コメント内容: <%= form.text_area :content, class: "form-control" %></h5>
           <%= form.hidden_field :question_id, value: @question.id %>

@@ -6,7 +6,7 @@
     <% @question.comments.each do |comment| %>
       <% if comment.content? %>
         <div class="col mb-3">
-          <div class="card text-center shadow-lg my-5 h-75" style="height: 300px;">
+          <div class="card text-center shadow-sm my-5 h-75" style="height: 300px;">
             <div class="card-body mt-3">
             <% if @question.best_answer_id == comment.id %>
               <strong>⭐︎ベストコメント⭐︎</strong><br>
