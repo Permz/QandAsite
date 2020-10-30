@@ -1,24 +1,39 @@
-# README
+# CareYou 概要
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+# 機能一覧
 
-* Ruby version
+- 会員登録機能
+- ログイン機能(ゲスト、一般、管理者)
+- 会員ページ
+- アカウント停止機能
+- プロフィール画像アップロード機能
+- 相談作成・閲覧機能
+- タグ作成・付与機能
+- コメント作成・閲覧機能
+- ベストコメント機能
+- ニュース記事作成・閲覧機能
+- お問い合わせ作成機能
+- ページネーション機能
+- パンくずリスト機能
+- 
 
-* System dependencies
 
-* Configuration
+# 使用技術一覧
 
-* Database creation
+## フロントエンド
 
-* Database initialization
+- Bootstrap(v4.5)
 
-* How to run the test suite
+## バックエンド
 
-* Services (job queues, cache servers, search engines, etc.)
+- Ruby(v6.0.3)
+- Rails(v2.7.1)
 
-* Deployment instructions
+## データベース
 
-* ...
+- Mysql(v8.0)
+
+## 
+
+
