@@ -26,6 +26,6 @@ https://
 
 - フロントエンド: Bootstrap(v4.5)
 - バックエンド: Ruby(v6.0.3), Rails(v2.7.1)
-- データベース: Mysql(v8.0.21)
+- データベース: Amazaon Aurora Mysql
 - コンテナ: Docker(v19.03.13), docker-compose(v1.27.4)
 - インフラストラクチャ: AWS(vpc, ec2, rds, route53)
