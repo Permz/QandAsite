@@ -46,13 +46,15 @@
 
 <!-- 相談コーナーへの導線 -->
 <div class="container mt-3">
-  <div class="container mt-5">
-    <h2>相談してみましょう</h2>
-    <p>相談コーナーでは、介護の悩みを気軽に相談できます。</p>
-  </div>
-  <div class="container mb-5">
-    <%= link_to "相談一覧", questions_path, class: "btn btn-info btn-lg mx-1" %>
-    <%= link_to "相談してみる", new_question_path, class: "btn btn-success btn-lg mx-1" %>
+  <div class="card">
+    <div class="container mt-5">
+      <h2>相談してみましょう</h2>
+      <p>相談コーナーでは、介護の悩みを気軽に相談できます。</p>
+    </div>
+    <div class="container mb-5">
+      <%= link_to "相談一覧", questions_path, class: "btn btn-info btn-lg mx-1" %>
+      <%= link_to "相談してみる", new_question_path, class: "btn btn-success btn-lg mx-1" %>
+    </div>
   </div>
 </div>
 
