@@ -26,7 +26,13 @@
                   <%= link_to category.name, category_path(id: category.id), class: "badge badge-pill badge-secondary" %>
                 </span></h5>
               <% end %>
-            <p class="card-text text-right text-muted">投稿者：<%= question.user.name %></p>
+            <p class="card-text text-right text-muted">投稿者：
+              <% if question.user.image? %>
+                <%= image_tag question.user.image.mini.url %>
+              <% else %>
+              <% end %>
+              <%= question.user.name %>
+            </p>
             <%= link_to '詳細', question, class: "btn btn-info btn-lg" %>
           </div>
         </div>

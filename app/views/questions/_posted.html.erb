@@ -1,4 +1,3 @@
-
 <h2 class="my-5">相談へのコメント</h2>
 
 <div class="container justify-content-center">
@@ -12,16 +11,14 @@
               <strong>⭐︎ベストコメント⭐︎</strong><br>
             <% end %>
               <h5 class="card-text"><%= comment.content %></h5>
-              <div class="container">
+              <p class="card-text text-right text-muted">
+                投稿者：
                 <% if @user.image? %>
                   <%= image_tag @user.image.mini.url %>
                 <% else %>
-                  <!--
-                    image_tag "noimage.gif" 
-                  -->
                 <% end %>
-              </div>
-              <p class="card-text text-right text-muted">投稿者：<%= comment.user.name unless comment.user.blank? %></p>
+                <%= comment.user.name unless comment.user.blank? %>
+              </p>
               <hr>
               <% if current_user == comment.user %>
                 <%= link_to_unless @question.best_answer_id, "コメント削除", question_comment_path(@question, comment), method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger btn-sm' %>

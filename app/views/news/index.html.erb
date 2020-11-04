@@ -15,7 +15,13 @@
       <h5 class="card-header">タイトル：<%= news.title %></h5>
       <div class="card-body">
         <h5 class="card-title"><%= news.content %></h5>
-        <p class="card-text text-right text-muted">投稿者：<%= User.find_by(id: news.user_id).name %></p>
+        <p class="card-text text-right text-muted">投稿者：
+          <% if User.find_by(id: news.user_id).image? %>
+            <%= image_tag User.find_by(id: news.user_id).image.mini.url %>
+          <% else %>
+          <% end %>
+          <%= User.find_by(id: news.user_id).name %>
+        </p>
         <%= link_to '詳細', news, class: "btn btn-info btn-lg" %>
       </div>
     </div>

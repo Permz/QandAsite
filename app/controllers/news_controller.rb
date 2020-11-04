@@ -15,6 +15,7 @@ class NewsController < ApplicationController
   # GET /news/1.json
   def show
     add_breadcrumb "ニュース詳細", :news_path
+    @user = User.find_by(id: @news.user_id)
   end
 
   # GET /news/new
