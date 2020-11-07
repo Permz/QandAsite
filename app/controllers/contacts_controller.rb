@@ -19,10 +19,6 @@ class ContactsController < ApplicationController
     add_breadcrumb "お問い合わせ", :new_contact_path
   end
 
-  # GET /contacts/1/edit
-  def edit
-  end
-
   # POST /contacts
   # POST /contacts.json
   def create
@@ -39,26 +35,12 @@ class ContactsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /contacts/1
-  # PATCH/PUT /contacts/1.json
-  def update
-    respond_to do |format|
-      if @contact.update(contact_params)
-        format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
-        format.json { render :show, status: :ok, location: @contact }
-      else
-        format.html { render :edit }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # DELETE /contacts/1
   # DELETE /contacts/1.json
   def destroy
     @contact.destroy
     respond_to do |format|
-      format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
+      format.html { redirect_to contacts_url, notice: 'お問い合わせの削除に成功しました' }
       format.json { head :no_content }
     end
   end
