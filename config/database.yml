@@ -13,21 +13,20 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
-  # host: <%= ENV['MYSQL_HOST'] %>
-  socket: /tmp/mysql.sock
+  username: root
+  password: password #編集
+  host: db #編集
 
 development:
   <<: *default
-  database: QandA_development
+  database: QandA_development_ecs
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: QandA_test
+  database: QandA_test_ecs
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -50,6 +49,11 @@ test:
 #
 production:
   <<: *default
-  database: QandA_production
-  username: QandA
-  password: <%= ENV['QandA_DATABASE_PASSWORD'] %>
+  database: <%= ENV['DB_PRODUCTION'] %>
+  adapter: mysql2
+  encoding: utf8mb4
+  charset: utf8mb4
+  collation: utf8mb4_general_ci
+  host: <%= ENV['DB_HOST'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
