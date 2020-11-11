@@ -20,6 +20,7 @@ services:
     extends:
       file: ./docker/mysql/password.yml
       service: password
+
   db:
     build:
       context: .
@@ -31,6 +32,7 @@ services:
     extends:  
       file: ./docker/mysql/password.yml
       service: password
+
   nginx:
     build:
       context: .
