@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>介護情報Q&Aサイト</title>
+    <title>CareYou 介護情報Q&Aサイト</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -25,9 +25,9 @@
                 相談コーナー
               </a>
               <div class="dropdown-menu shadow-sm" aria-labelledby="navbarDropdown">
-                <a class="nav-link dropdown-item" href="/questions">相談一覧</a>
+                <%= link_to '相談一覧', questions_path, class: "dropdown-item" %>
                 <div class="dropdown-divider"></div>
-                <a class="nav-link dropdown-item" href="/questions/new">相談作成</a>
+                <%= link_to '相談作成', new_question_path, class: "dropdown-item" %>
               </div>
             </li>
           <li class="nav-item">
@@ -69,7 +69,6 @@
     </div>
   </body>
 
-  <!-- フッター -->
   <footer id="sticky-footer" class="mt-auto py-3 bg-light">
     <div class="container text-center">
       <small class="text-muted">©︎ Permz 2020</small>
