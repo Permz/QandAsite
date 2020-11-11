@@ -7,13 +7,13 @@
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="http://via.placeholder.com/728x200" class="d-block w-100" alt="スライド1">
+      <%= image_tag "kaigo_shisetsu.jpg", class: "d-block w-100", alt: "スライド1", style: "height: 550px;" %>
     </div>
     <div class="carousel-item">
-      <img src="http://via.placeholder.com/728x200" class="d-block w-100" alt="スライド2">
+      <%= image_tag "caregiver.jpeg", class: "d-block w-100", alt: "スライド2", style: "height: 550px;" %>
     </div>
     <div class="carousel-item">
-      <img src="http://via.placeholder.com/728x200" class="d-block w-100" alt="スライド3">
+      <%= image_tag "wheelchair.jpg", class: "d-block w-100", alt: "スライド3", style: "height: 550px;" %>
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -33,14 +33,40 @@
 
 <!-- ジャンボトロン -->
 <div class="container mt-5">
-  <div class="jumbotron">
+  <div class="jumbotron shadow-sm">
     <h2 class="display-4">CareYou</h2>
     <p class="lead">あなたと介護を考える</p>
-    <hr class="my-4">
+    <hr class="my-3">
     <p>CareYouは、介護を行うあなたのための情報共有サイトです。</p>
-    <div class="container mt-5">
-      <%= link_to '新規会員登録', new_user_session_path, class: "btn btn-primary btn-lg shadow-lg" %>
+    <div class="container mt-4">
+      <%= link_to '新規会員登録', new_user_session_path, class: "btn btn-primary btn-lg shadow-sm" %>
     </div>
   </div>
 </div>
 
+<!-- 相談コーナーへの導線 -->
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="container mt-5">
+      <h2>相談してみましょう</h2>
+      <p>相談コーナーでは、介護の悩みを気軽に相談できます。</p>
+    </div>
+    <div class="container mb-5">
+      <%= link_to "相談一覧", questions_path, class: "btn btn-info btn-lg mx-1" %>
+      <%= link_to "相談してみる", new_question_path, class: "btn btn-success btn-lg mx-1" %>
+    </div>
+  </div>
+</div>
+
+<!-- ニュースコーナーへの導線 -->
+<div class="container my-5">
+  <div class="card shadow-sm">
+    <div class="container mt-5">
+      <h2>ニュース</h2>
+      <p>介護に関する最新のニュースを配信します。</p>
+    </div>
+    <div class="container mb-5">
+      <%= link_to "ニュース一覧", news_index_path, class: "btn btn-warning btn-lg mx-1" %>
+    </div>
+  </div>
+</div>

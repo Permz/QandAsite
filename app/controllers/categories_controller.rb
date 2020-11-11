@@ -2,8 +2,11 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :update, :destroy]
   before_action :isnt_manager, only: [:new, :update, :destroy]
 
+  add_breadcrumb "カテゴリー一覧", :categories_path
+
   def new
     @category = Category.new
+    add_breadcrumb "カテゴリー作成", :new_category_path
   end
 
   def index
@@ -25,6 +28,7 @@ class CategoriesController < ApplicationController
   def show
     @category = Category.find(params[:id])
     @questions = @category.questions
+    add_breadcrumb "カテゴリー詳細", :category_path
   end
 
   private

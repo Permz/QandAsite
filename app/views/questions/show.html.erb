@@ -1,19 +1,26 @@
-<h1 class="mb-5">質問内容</h1>
+<div class="container my-3">
+  <h1>質問内容</h1>
+</div>
+
+<div class="container">
+  <ol class="breadcrumb">
+    <%= render_breadcrumbs :tag => :li, :separator => " / " %>
+  </ol>
+</div>
 
 <div class="container justify-content-around">
   <div class="row">
-    <div class="card text-center shadow-lg my-3 h-75" style="height: 900px; width: 1600px;">
+    <div class="card text-center my-3 h-75 shadow-sm" style="height: 900px; width: 1600px;">
       <h5 class="card-header">タイトル：<%= @question.title %></h5>
       <div class="card-body">
         <h5 class="card-title"><%= @question.content %></h5>
-        <% if @user.image? %>
-          <%= image_tag @user.image.thumb.url %>
-        <% else %>
-          <!--
-            = image_tag "noimage.gif" 
-          -->
-        <% end %>
-        <p class="card-text text-right text-muted">投稿者：<%= @question.user.name %></p>
+        <p class="card-text text-right text-muted">投稿者：
+          <% if @user.image? %>
+            <%= image_tag @user.image.mini.url %>
+          <% else %>
+            <p>画像がありません</p>
+          <% end %>
+          <%= @question.user.name %></p>
         <div class="container my-3">
           <% @question.categories.each do |category| %>
             <h5><%= link_to category.name, category_path(id: category.id), class: "badge badge-pill badge-secondary" %></h5>

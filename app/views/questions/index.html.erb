@@ -1,14 +1,22 @@
-<h1 class="mb-5">相談一覧</h1>
+<div class="container my-3">
+  <h1 class="mb-5">相談一覧</h1>
+</div>
+
+<div class="container">
+  <ol class="breadcrumb">
+    <%= render_breadcrumbs :tag => :li, :separator => " / " %>
+  </ol>
+</div>
 
 <%= will_paginate @questions, list_classes: %w(pagination justify-content-center), :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
 <div class="container justify-content-center">
   <div class="row row-cols-1 row-cols-md-2">
     <% @questions.each do |question| %>
       <div class="col mb-3">
-        <div class="card text-center shadow-lg my-5 h-75" style="height: 300px;">
+        <div class="card text-center shadow my-5 h-75" style="height: 300px;">
           <h5 class="card-header">タイトル：<%= question.title %>
           <% if question.best_answer_id %>
-            <span class="badge font-italic", style="color: red;" >解決済み</span>
+            <span class="badge font-italic" style="color: red;" >解決済み</span>
           <% end %>
           </h5>
           <div class="card-body">
@@ -18,7 +26,13 @@
                   <%= link_to category.name, category_path(id: category.id), class: "badge badge-pill badge-secondary" %>
                 </span></h5>
               <% end %>
-            <p class="card-text text-right text-muted">投稿者：<%= question.user.name %></p>
+            <p class="card-text text-right text-muted">投稿者：
+              <% if question.user.image? %>
+                <%= image_tag question.user.image.mini.url %>
+              <% else %>
+              <% end %>
+              <%= question.user.name %>
+            </p>
             <%= link_to '詳細', question, class: "btn btn-info btn-lg" %>
           </div>
         </div>

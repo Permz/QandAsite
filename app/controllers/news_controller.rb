@@ -1,6 +1,9 @@
 class NewsController < ApplicationController
   before_action :set_news, only: [:show, :edit, :update, :destroy]
-  before_action :not_manager, only: [:new, :edit, :update, :destroy] # 管理者でなければindex,showしか見られない
+  before_action :authenticate_user!, only: [:index, :show]
+  before_action :not_manager, only: [:new, :edit, :update, :destroy]
+
+  add_breadcrumb "ニュース一覧", :news_index_path
 
   # GET /news
   # GET /news.json
@@ -11,6 +14,8 @@ class NewsController < ApplicationController
   # GET /news/1
   # GET /news/1.json
   def show
+    add_breadcrumb "ニュース詳細", :news_path
+    @user = User.find_by(id: @news.user_id)
   end
 
   # GET /news/new
@@ -29,7 +34,7 @@ class NewsController < ApplicationController
 
     respond_to do |format|
       if @news.save
-        format.html { redirect_to @news, notice: 'News was successfully created.' }
+        format.html { redirect_to @news, notice: 'ニュースの投稿に成功しました！' }
         format.json { render :show, status: :created, location: @news }
       else
         format.html { render :new }
@@ -43,7 +48,7 @@ class NewsController < ApplicationController
   def update
     respond_to do |format|
       if @news.update(news_params)
-        format.html { redirect_to @news, notice: 'News was successfully updated.' }
+        format.html { redirect_to @news, notice: 'ニュースの更新に成功しました！' }
         format.json { render :show, status: :ok, location: @news }
       else
         format.html { render :edit }
@@ -57,7 +62,7 @@ class NewsController < ApplicationController
   def destroy
     @news.destroy
     respond_to do |format|
-      format.html { redirect_to news_index_url, notice: 'News was successfully destroyed.' }
+      format.html { redirect_to news_index_url, notice: 'ニュースの削除に成功しました' }
       format.json { head :no_content }
     end
   end

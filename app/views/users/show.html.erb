@@ -1,28 +1,39 @@
-<h1>会員情報</h1>
-<% if @user.admin_flg? %>
-  <small class="font-italic">管理者です</small>
-  <br>
-<% end %>
-<hr>
-<div class="container my-4 font-italic">
-  <% if @user.image? %>
-    <%= image_tag @user.image.thumb.url %>
-  <% else %>
-    <p>画像がありません</p>
-    <!--
-      = image_tag "noimage.gif" 
-    -->
-  <% end %>
+<div class="container my-3">
+  <h1>会員情報</h1>
 </div>
-<h4>ユーザー名: <small><%= @user.name %></small></h4>
-<hr>
-<h4>所属: <small><%= @user.belonging %></small></h4>
-<h4>自己紹介: </h4>
-<p><%= @user.introduction %></p>
 
-<div class="container my-5">
-  <%= link_to 'プロフィール編集', edit_user_registration_path, class: "btn btn-info" %>
+<div class="container">
+  <ol class="breadcrumb">
+    <%= render_breadcrumbs :tag => :li, :separator => " / " %>
+  </ol>
+</div>
+
+<div class="container card shadow-sm my-5">
   <% if @user.admin_flg? %>
-    <%= link_to '管理ページ', rails_admin_path, class: "btn btn-secondary" %>
+    <div class="container my-3">
+      <small class="font-italic">管理者です</small>
+      <hr>
+    </div>
   <% end %>
+
+  <div class="container my-4 font-italic">
+    <% if @user.image? %>
+      <%= image_tag @user.image.thumb.url %>
+    <% else %>
+      <p>画像がありません</p>
+    <% end %>
+  </div>
+
+  <h4>ユーザー名 <strong><%= @user.name %></strong></h4>
+  <hr>
+  <h4>所属: <strong><%= @user.belonging %></strong></h4>
+  <h4>自己紹介: </h4>
+  <p><%= @user.introduction %></p>
+
+  <div class="container my-5">
+    <%= link_to 'プロフィール編集', edit_user_registration_path, class: "btn btn-info" %>
+    <% if @user.admin_flg? %>
+      <%= link_to '管理ページ', rails_admin_path, class: "btn btn-secondary" %>
+    <% end %>
+  </div>
 </div>

@@ -1,4 +1,12 @@
-<h1 class="mb-5">新規相談作成</h1>
+<div class="container my-3">
+  <h1>新規相談作成</h1>
+</div>
+
+<div class="container">
+  <ol class="breadcrumb">
+    <%= render_breadcrumbs :tag => :li, :separator => " / " %>
+  </ol>
+</div>
 
 <%= render 'form', question: @question %>
 

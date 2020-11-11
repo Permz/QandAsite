@@ -2,7 +2,6 @@
   <% if news.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(news.errors.count, "error") %> prohibited this news from being saved:</h2>
-
       <ul>
         <% news.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -10,12 +9,12 @@
       </ul>
     </div>
   <% end %>
-  <div class="my-4">
-    <div class="row justify-content-around">
-      <div class="card text-center col-8 shadow-lg my-3">
-        <h5 class="card-header">タイトル: <%= form.text_field :title %></h5>
+  <div class="container justify-content-around">
+    <div class="row text-center">
+      <div class="card text-center shadow-sm my-3 h-75" style="height: 900px; width: 1600px;">
+        <h5 class="card-header">タイトル<%= form.text_field :title, class: "form-control" %></h5>
         <div class="card-body">
-          <h5 class="card-title">投稿内容: <%= form.text_area :content %></h5>
+          <h5 class="card-title">投稿内容<%= form.text_area :content, class: "form-control" %></h5>
           <div class="actions">
             <%= form.submit "投稿", class: "btn btn-success btn-lg" %>
           </div>

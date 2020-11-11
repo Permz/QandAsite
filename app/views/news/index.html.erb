@@ -1,13 +1,31 @@
-<h1>ニュース一覧</h1>
+<div class="container my-3">
+  <h1>ニュース一覧</h1>
+</div>
+
+<div class="container">
+  <ol class="breadcrumb">
+    <%= render_breadcrumbs :tag => :li, :separator => " / " %>
+  </ol>
+</div>
+
+<% if current_user.admin_flg == true %>
+  <%= link_to "ニュース投稿", new_news_path, class: "btn btn-sm btn-primary" %>
+<% end %>
 
 <%= will_paginate @newss, list_classes: %w(pagination justify-content-center), :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
 <% @newss.each do |news| %>
   <div class="row justify-content-around">
-    <div class="card text-center col-6 shadow-lg my-5">
+    <div class="card text-center shadow-sm my-5 h-75" style="height: 300px;">
       <h5 class="card-header">タイトル：<%= news.title %></h5>
       <div class="card-body">
         <h5 class="card-title"><%= news.content %></h5>
-        <p class="card-text text-right text-muted">投稿者：<%= news.user_id %></p>
+        <p class="card-text text-right text-muted">投稿者：
+          <% if User.find_by(id: news.user_id).image? %>
+            <%= image_tag User.find_by(id: news.user_id).image.mini.url %>
+          <% else %>
+          <% end %>
+          <%= User.find_by(id: news.user_id).name %>
+        </p>
         <%= link_to '詳細', news, class: "btn btn-info btn-lg" %>
       </div>
     </div>
