@@ -6,9 +6,9 @@ RSpec.describe User, type: :model do
   end
 
   describe 'バリデーション' do
-    it 'nameとemailどちらも値が設定されていれば、OK' do
-      expect(@user.valid?).to eq(true)
-    end
+    # it 'nameとemailどちらも値が設定されていれば、OK' do
+    #   expect(@user.valid?).to eq(true)
+    # end
 
     it 'nameが空だとNG' do
       @user.name = ''
