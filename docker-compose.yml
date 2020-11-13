@@ -8,21 +8,22 @@ services:
       - '3000:3000'
     volumes:
       - '.:/app'
-      - tmp-volume:/app/tmp
       - '~/.ssh:/root/.ssh'
     tty: true
     stdin_open: true
-
-  nginx:
-    build:
-      context: .
-      dockerfile: ./nginx/Dockerfile
-    ports:
-      - 80:80
-    volumes:
-      - tmp-volume:/app/tmp
     depends_on:
-      - app
+      - db
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
 
 volumes:
-  tmp-volume: # volumeを使ってsockファイルにアクセス
+  mysql_data:
+    driver: local

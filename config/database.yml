@@ -15,7 +15,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV['DB_USERNAME'] %>
   password: <%= ENV['DB_PASSWORD'] %>
-  # host: <%= ENV['MYSQL_HOST'] %>
+  host: db
   socket: /tmp/mysql.sock
 
 development:
@@ -48,8 +48,9 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: QandA_production
-  username: QandA
-  password: <%= ENV['QandA_DATABASE_PASSWORD'] %>
+# production:
+#   <<: *default
+#   database: <%= ENV['DB_NAME'] %>
+#   username: <%= ENV['DB_USERNAME'] %>
+#   password: <%= ENV['DB_PASSWORD'] %>
+#   host: <%= ENV['DB_HOSTNAME'] %>

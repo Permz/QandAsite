@@ -9,7 +9,6 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     nodejs \
     default-mysql-client \
-    sudo \
     vim && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
@@ -21,10 +20,10 @@ COPY Gemfile Gemfile.lock /app/
 
 COPY . /app
 
-RUN bundle && \
+RUN bundle install -j4 && \
     yarn upgrade && \
-    rails webpacker:install && \
-    yarn install --check-files
+    yarn install --check-files && \
+    rails webpacker:install
 
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
