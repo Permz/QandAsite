@@ -4,7 +4,7 @@ __介護における相談・悩みを一緒に考えるQ&Aサイト__
 
 # アプリケーションURL
 
-https://
+https://carey0u.net
 
 # 機能一覧
 
@@ -26,6 +26,6 @@ https://
 
 - フロントエンド: Bootstrap(v4.5)
 - バックエンド: Ruby(v6.0.3), Rails(v2.7.1)
-- データベース: Amazaon Aurora Mysql
+- データベース: Amazaon RDS (Mysql Aurora)
 - コンテナ: Docker(v19.03.13), docker-compose(v1.27.4)
-- インフラストラクチャ: AWS(vpc, ec2, rds, route53)
+- クラウドインフラ: AWS(vpc, ec2, rds, route53, Certificate Manager)
