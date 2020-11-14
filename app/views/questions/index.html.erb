@@ -20,7 +20,11 @@
           <% end %>
           </h5>
           <div class="card-body">
-            <h5 class="card-title"><%= question.content %></h5>
+            <h5 class="card-title">
+              <%= truncate(question.content, length: 30) do %>
+                <p class="text-muted font-italic">続きを読むには<%= link_to 'ここ', question %>をクリックしてください。<p>
+              <% end %>
+            </h5>
               <% question.categories.each do |category| %>
                 <h5><span>
                   <%= link_to category.name, category_path(id: category.id), class: "badge badge-pill badge-secondary" %>
@@ -33,7 +37,6 @@
               <% end %>
               <%= question.user.name %>
             </p>
-            <%= link_to '詳細', question, class: "btn btn-info btn-lg" %>
           </div>
         </div>
       </div>

@@ -14,13 +14,14 @@
       <h5 class="card-header">タイトル：<%= @question.title %></h5>
       <div class="card-body">
         <h5 class="card-title"><%= @question.content %></h5>
-        <p class="card-text text-right text-muted">投稿者：
+        <div class="card-text text-right text-muted">
           <% if @user.image? %>
             <%= image_tag @user.image.mini.url %>
           <% else %>
-            <p>画像がありません</p>
+            <p class="font-italic">画像がありません</p>
           <% end %>
-          <%= @question.user.name %></p>
+          <p>投稿者 <%= @question.user.name %></p>
+        </div>
         <div class="container my-3">
           <% @question.categories.each do |category| %>
             <h5><%= link_to category.name, category_path(id: category.id), class: "badge badge-pill badge-secondary" %></h5>
