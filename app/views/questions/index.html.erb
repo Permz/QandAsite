@@ -21,15 +21,16 @@
           </h5>
           <div class="card-body">
             <h5 class="card-title">
-              <%= truncate(question.content, length: 30) do %>
-                <p class="text-muted font-italic">続きを読むには<%= link_to 'ここ', question %>をクリックしてください。<p>
-              <% end %>
+              <%= truncate(question.content, length: 30) %><br>
             </h5>
               <% question.categories.each do |category| %>
                 <h5><span>
                   <%= link_to category.name, category_path(id: category.id), class: "badge badge-pill badge-secondary" %>
                 </span></h5>
               <% end %>
+            <div class="container my-3">
+              <%= link_to '続きを読む', question, class: "btn btn-info" %>
+            </div>
             <p class="card-text text-right text-muted">投稿者：
               <% if question.user.image? %>
                 <%= image_tag question.user.image.mini.url %>
@@ -55,6 +56,6 @@
 <div class="container my-5">
   <%= link_to '新規質問作成', new_question_path, class: "btn btn-success btn-lg" %>
   <% unless user_signed_in? %>
-    <h5 class="my-2 font-italic text-muted">ログインするとコメントできます</h5>
+    <h5 class="my-2 font-italic text-muted">ログインするとコメントできます!</h5>
   <% end %>
 </div>
