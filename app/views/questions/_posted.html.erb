@@ -1,0 +1,46 @@
+<h2 class="my-5">相談へのコメント</h2>
+
+<div class="container justify-content-center">
+  <div class="row row-cols-1 row-cols-md-2">
+    <% @question.comments.each do |comment| %>
+      <% if comment.content? %>
+        <div class="col mb-3">
+          <div class="card text-center shadow-sm my-5 h-75" style="height: 300px;">
+            <div class="card-body mt-3">
+            <% if @question.best_answer_id == comment.id %>
+              <strong>⭐︎ベストコメント⭐︎</strong><br>
+            <% end %>
+              <h5 class="card-text"><%= comment.content %></h5>
+              <p class="card-text text-right text-muted">
+                投稿者：
+                <% if @user.image? %>
+                  <%= image_tag @user.image.mini.url %>
+                <% else %>
+                <% end %>
+                <%= comment.user.name unless comment.user.blank? %>
+              </p>
+              <hr>
+              <% if current_user == comment.user %>
+                <%= link_to_unless @question.best_answer_id, "コメント削除", question_comment_path(@question, comment), method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger btn-sm' %>
+              <% end %>
+            </div>
+            <% if @question.user == current_user %>
+              <div class="text-center disabled<%= "disabled" if @question.best_answer_id != nil %>">
+                <%= button_to "ベストコメント！", { controller: 'questions', action: 'update' },
+                  { method: :put, class: "btn btn-warning btn-sm mb-4", params: { question: { title: @question.title,
+                                                                                              content: @question.content,
+                                                                                              user_id: @question.user_id,
+                                                                                              best_answer_id: comment.id
+                  }},
+                  disabled: @question.best_answer_id,
+                  data: { confirm: "#{ User.find_by(id: comment.user_id).name }さんの回答をベストコメントにします。この修正は変更できませんが、よろしいですか？" }
+                  }
+                %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

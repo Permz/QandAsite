@@ -1,0 +1,15 @@
+<div class="container my-3">
+  <h1>相談内容編集</h1>
+</div>
+
+<div class="container">
+  <ol class="breadcrumb">
+    <%= render_breadcrumbs :tag => :li, :separator => " / " %>
+  </ol>
+</div>
+
+<%= render 'form', question: @question %>
+
+<div class="container mb-5">
+  <%= link_to '戻る', questions_path, class: "btn btn-secondary btn-lg" %>
+</div>

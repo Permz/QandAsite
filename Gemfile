@@ -33,7 +33,19 @@ gem 'devise'
 gem 'rails_admin', '2.0.2'
 gem 'cancancan'
 
-gem 'meta-tags'
+gem 'carrierwave'
+gem 'rmagick'
+
+gem 'will_paginate'
+gem 'will_paginate-bootstrap4'
+
+gem 'rails-i18n'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
+
+gem 'breadcrumbs_on_rails'
+
+gem 'rails_admin-i18n'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -55,6 +67,9 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  gem "rspec-rails", '~> 4.0.1'
+  gem 'spring-commands-rspec'
+  gem "factory_bot_rails"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

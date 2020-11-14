@@ -1,0 +1,8 @@
+<div class="container my-3">
+  <h1>ニュース編集</h1>
+</div>
+
+<%= render 'form', news: @news %>
+
+<%= link_to 'Show', @news, class: "btn btn-info btn-lg mx-3" %> |
+<%= link_to 'Back', news_index_path, class: "btn btn-secondary btn-lg mx-3" %>

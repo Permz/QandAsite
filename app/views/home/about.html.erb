@@ -1,0 +1,26 @@
+<div class="container my-3">
+  <h1>CareYouの概要</h1>
+</div>
+
+<div class="container">
+  <ol class="breadcrumb">
+    <%= render_breadcrumbs :tag => :li, :separator => " / " %>
+  </ol>
+</div>
+
+<div class="container my-5">
+  <div class="card mb-3 shadow-sm">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <%= image_tag "free-kaigo.jpeg", src: "src", class: "card-img", alt: "img", style: "width: 480px;" %>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">CareYouとは</h5>
+          <p class="card-text">介護に携わる方と共に、これからの介護を考えていきます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -4,5 +4,20 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
+  validates :name, presence: true
+  validates :email, presence: true
   validates :introduction, presence: false, length: { maximum: 100 } #100文字制限
+
+  mount_uploader :image, ImageUploader
+
+  has_many :questions, dependent: :destroy
+  has_many :comments, dependent: :destroy
+
+  def self.guest
+    find_or_create_by(email: 'guest@example.com') do |user|
+      user.name = 'ゲストユーザー'
+      user.password = SecureRandom.urlsafe_base64
+      user.admin_flg = false
+    end
+  end
 end

@@ -1,0 +1,46 @@
+<%= form_with(model: question, local: true) do |form| %>
+  <% if question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
+      <ul>
+        <% question.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="container justify-content-around">
+    <div class="row text-center">
+      <div class="card shadow-lg my-3 h-75" style="height: 900px; width: 1600px;">
+        <h5 class="card-header">タイトル
+          <div class="container my-2">
+            <div class="form-group">
+              <%= form.text_field :title, class: "form-control", placeholder: "タイトル" %>
+            </div>
+          </div>
+        </h5>
+        <div class="card-body">
+          <h5 class="card-title">投稿内容
+            <div class="container my-2">
+              <%= form.text_area :content, class: "form-control" %>
+            </div>
+          </h5>
+          <h5 class="container">タグ
+            <%= form.collection_check_boxes :category_ids, Category.all, :id, :name, include_hidden: false do |category| %>
+              <div class="form-check form-check-inline">
+                <%= category.check_box class: "form-check-input" %>
+                <%= category.label { category.text } %>
+              </div>
+            <% end %>
+          </h5>
+          <div class="actions">
+            <%= form.submit "投稿", class: "btn btn-success btn-lg my-3" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container my-4">
+    <hr>
+  </div>
+<% end %>

@@ -1,0 +1,59 @@
+<div class="container my-3">
+  <h1>質問内容</h1>
+</div>
+
+<div class="container">
+  <ol class="breadcrumb">
+    <%= render_breadcrumbs :tag => :li, :separator => " / " %>
+  </ol>
+</div>
+
+<div class="container justify-content-around">
+  <div class="row">
+    <div class="card text-center my-3 h-75 shadow-sm" style="height: 900px; width: 1600px;">
+      <h5 class="card-header">タイトル：<%= @question.title %></h5>
+      <div class="card-body">
+        <h5 class="card-title"><%= @question.content %></h5>
+        <p class="card-text text-right text-muted">投稿者：
+          <% if @user.image? %>
+            <%= image_tag @user.image.mini.url %>
+          <% else %>
+            <p>画像がありません</p>
+          <% end %>
+          <%= @question.user.name %></p>
+        <div class="container my-3">
+          <% @question.categories.each do |category| %>
+            <h5><%= link_to category.name, category_path(id: category.id), class: "badge badge-pill badge-secondary" %></h5>
+          <% end %>
+        </div>
+        <% if current_user.id == @question.user_id %>
+          <hr>
+          <%= link_to_unless @question.best_answer_id, "編集", edit_question_path(@question), class: "btn btn-success mx-2" %>
+          <%= link_to_unless @question.best_answer_id, "削除", @question, method: :delete, class: "btn btn-danger mx-2", data: { confirm: '削除しますか?' } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container my-5">
+  <hr>
+</div>
+
+<%= render 'posted', question: @question %>
+
+<div class="container my-5">
+  <hr>
+</div>
+
+<% unless @question.best_answer_id %>
+  <h2 class="my-5">コメントする</h2>
+  <%= render 'comments', question: @question %>
+  <div class="container my-5">
+  <hr>
+</div>
+<% end %>
+
+<div class="container my-4">
+  <%= link_to '相談一覧', questions_path, class: "btn btn-secondary mx-2 btn-lg" %>
+</div>

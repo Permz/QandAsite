@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>介護情報Q&Aサイト</title>
-    <%= display_meta_tags(default_meta_tags) %>
+    <title>CareYou 介護情報Q&Aサイト</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -11,7 +10,7 @@
 
   <body class="d-flex flex-column">
     <!-- ナビゲーションバー -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top">
       <a class="navbar-brand" href="/">CareYou</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <small class="navbar-toggler-icon"></small>
@@ -19,23 +18,23 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">概要</a>
+            <a class="nav-link" href="/about">概要</a>
           </li>
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 相談コーナー
               </a>
               <div class="dropdown-menu shadow-sm" aria-labelledby="navbarDropdown">
-                <a class="nav-link dropdown-item" href="#">相談一覧</a>
+                <%= link_to '相談一覧', questions_path, class: "dropdown-item" %>
                 <div class="dropdown-divider"></div>
-                <a class="nav-link dropdown-item" href="#">相談作成</a>
+                <%= link_to '相談作成', new_question_path, class: "dropdown-item" %>
               </div>
             </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">ニュース</a>
+            <a class="nav-link" href="/news">ニュース</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">お問い合わせ</a>
+            <a class="nav-link" href="/contacts/new">お問い合わせ</a>
           </li>
           <!-- ログインしているかしてないかでメニュー表示が変わる -->
           <% if user_signed_in? %>
@@ -56,18 +55,20 @@
             <li class="nav-item">
               <%= link_to 'ログイン', new_user_session_path, class: "nav-link" %>
             </li>
+            <li class="nav-item">
+              <%= link_to 'ゲストログイン', users_guest_path, class: "nav-link", method: :post %>
+            </li>
           <% end %>
         </ul>
       </div>
     </nav>
     <!-- deviseによる追加 -->
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <%= notice %><%= alert %>
     <div id="page-content" class="text-center">
       <%= yield %>
     </div>
   </body>
-  <!-- フッター -->
+
   <footer id="sticky-footer" class="mt-auto py-3 bg-light">
     <div class="container text-center">
       <small class="text-muted">©︎ Permz 2020</small>
