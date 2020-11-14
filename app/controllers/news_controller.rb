@@ -34,7 +34,7 @@ class NewsController < ApplicationController
 
     respond_to do |format|
       if @news.save
-        format.html { redirect_to @news, notice: 'ニュースの投稿に成功しました！' }
+        format.html { redirect_to @news, notice: "ニュースの投稿に成功しました！" }
         format.json { render :show, status: :created, location: @news }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class NewsController < ApplicationController
   def update
     respond_to do |format|
       if @news.update(news_params)
-        format.html { redirect_to @news, notice: 'ニュースの更新に成功しました！' }
+        format.html { redirect_to @news, notice: "ニュースの更新に成功しました！" }
         format.json { render :show, status: :ok, location: @news }
       else
         format.html { render :edit }
@@ -60,14 +60,15 @@ class NewsController < ApplicationController
   # DELETE /news/1
   # DELETE /news/1.json
   def destroy
-    @news.destroy
+    @news.destroy!
     respond_to do |format|
-      format.html { redirect_to news_index_url, notice: 'ニュースの削除に成功しました' }
+      format.html { redirect_to news_index_url, notice: "ニュースの削除に成功しました" }
       format.json { head :no_content }
     end
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_news
       @news = News.find(params[:id])

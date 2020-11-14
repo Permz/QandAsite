@@ -21,53 +21,50 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-  #上限変更
-  process :resize_to_limit => [700, 700]
+  # 上限変更
+  process resize_to_limit: [700, 700]
   #
   # def scale(width, height)
   #   # do something
   # end
 
-  #サムネイルを生成
+  # サムネイルを生成
   version :thumb do
-    process :resize_to_fill => [120, 120]
+    process resize_to_fill: [120, 120]
   end
 
   # miniアイコンを生成
   version :mini do
-    process :resize_to_fill => [40, 40]
+    process resize_to_fill: [40, 40]
   end
 
-  #JPGで保存
-  process :convert => 'jpg'
+  # JPGで保存
+  process convert: "jpg"
 
   # jpg,jpeg,gif,pngのみ
   def extension_white_list
-    %w(jpg jpeg gif png)
+    %w[jpg jpeg gif png]
   end
 
-  #ファイル名を変更し拡張子を同じにする
+  # ファイル名を変更し拡張子を同じにする
   def filename
-    super.chomp(File.extname(super)) + '.jpg' 
+    "#{super.chomp(File.extname(super))}.jpg"
   end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  #日付で保存
+  # 日付で保存
   def filename
     if original_filename.present?
-      time = Time.now
-      name = time.strftime('%Y%m%d%H%M%S') + '.jpg'
+      time = Time.zone.now
+      name = "#{time.strftime("%Y%m%d%H%M%S")}.jpg"
       name.downcase
     end
   end
 
   def auto
-    manipulate! do|image|
-      image.auto_orient
-    end
+    manipulate!(&:auto_orient)
   end
 
   process :auto
-
 end

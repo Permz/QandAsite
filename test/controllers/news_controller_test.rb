@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class NewsControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -16,7 +16,7 @@ class NewsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create news" do
-    assert_difference('News.count') do
+    assert_difference("News.count") do
       post news_index_url, params: { news: { content: @news.content, title: @news.title, user_id: @news.user_id } }
     end
 
@@ -39,7 +39,7 @@ class NewsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy news" do
-    assert_difference('News.count', -1) do
+    assert_difference("News.count", -1) do
       delete news_url(@news)
     end
 

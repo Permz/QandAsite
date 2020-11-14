@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe QuestionsController, type: :controller do
   describe "#index" do
@@ -6,6 +6,7 @@ RSpec.describe QuestionsController, type: :controller do
       get :index
       expect(response).to success
     end
+
     it "200レスポンスが返ってきている" do
       get :index
       expect(response.status).to eq 200

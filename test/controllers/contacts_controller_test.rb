@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class ContactsControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -16,7 +16,7 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create contact" do
-    assert_difference('Contact.count') do
+    assert_difference("Contact.count") do
       post contacts_url, params: { contact: { content: @contact.content, title: @contact.title, user_id: @contact.user_id } }
     end
 
@@ -39,7 +39,7 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy contact" do
-    assert_difference('Contact.count', -1) do
+    assert_difference("Contact.count", -1) do
       delete contact_url(@contact)
     end
 

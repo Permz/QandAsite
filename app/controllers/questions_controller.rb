@@ -38,10 +38,8 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        @category_ids.each do |category_id|
-          category_id.save
-        end
-        format.html { redirect_to @question, notice: '投稿に成功しました！' }
+        @category_ids.each(&:save)
+        format.html { redirect_to @question, notice: "投稿に成功しました！" }
         format.json { render :show, status: :created, location: @question }
       else
         format.html { render :new }
@@ -55,7 +53,7 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @question.update(question_params)
-        format.html { redirect_to @question, notice: '保存に成功しました！' }
+        format.html { redirect_to @question, notice: "保存に成功しました！" }
         format.json { render :show, status: :ok, location: @question }
       else
         format.html { render :edit }
@@ -67,14 +65,15 @@ class QuestionsController < ApplicationController
   # DELETE /questions/1
   # DELETE /questions/1.json
   def destroy
-    @question.destroy
+    @question.destroy!
     respond_to do |format|
-      format.html { redirect_to questions_url, notice: '削除に成功しました' }
+      format.html { redirect_to questions_url, notice: "削除に成功しました" }
       format.json { head :no_content }
     end
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_question
       @question = Question.find(params[:id])

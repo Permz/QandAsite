@@ -17,10 +17,10 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
     respond_to do |format|
       if @category.save
-        format.html { redirect_to @category, notice: 'カテゴリー追加に成功しました！' }
+        format.html { redirect_to @category, notice: "カテゴリー追加に成功しました！" }
         format.json { render :index, status: :created, location: @category }
       else
-        format.html { render :new, alert: 'カテゴリー追加に失敗しました' }
+        format.html { render :new, alert: "カテゴリー追加に失敗しました" }
       end
     end
   end
@@ -33,16 +33,15 @@ class CategoriesController < ApplicationController
 
   private
 
-  def set_category
-    @category = Category.find(params[:id])
-  end
+    def set_category
+      @category = Category.find(params[:id])
+    end
 
-  def category_params
-    params.require(:category).permit(:name)
-  end
+    def category_params
+      params.require(:category).permit(:name)
+    end
 
-  def isnt_manager
-    current_user.admin_flg == false
-  end
-
+    def isnt_manager
+      current_user.admin_flg == false
+    end
 end
