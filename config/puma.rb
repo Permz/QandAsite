@@ -36,6 +36,7 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
-
+stdout_redirect "/var/www/rails/QandAsite/log/puma/puma.stdout.log", "/var/www/rails/QandAsite/log/puma/puma.stderr.log", true
+daemonize true
 # socketの設定
 bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
