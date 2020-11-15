@@ -13,19 +13,24 @@
   <div class="row row-cols-1 row-cols-md-2">
     <% @questions.each do |question| %>
       <div class="col mb-3">
-        <div class="card text-center shadow my-5 h-75" style="height: 300px;">
+        <div class="card text-center shadow-sm my-5 h-75" style="height: 300px;">
           <h5 class="card-header">タイトル：<%= question.title %>
           <% if question.best_answer_id %>
             <span class="badge font-italic" style="color: red;" >解決済み</span>
           <% end %>
           </h5>
           <div class="card-body">
-            <h5 class="card-title"><%= question.content %></h5>
+            <h5 class="card-title">
+              <%= truncate(question.content, length: 30) %><br>
+            </h5>
               <% question.categories.each do |category| %>
                 <h5><span>
                   <%= link_to category.name, category_path(id: category.id), class: "badge badge-pill badge-secondary" %>
                 </span></h5>
               <% end %>
+            <div class="container my-3">
+              <%= link_to '続きを読む', question, class: "btn btn-info" %>
+            </div>
             <p class="card-text text-right text-muted">投稿者：
               <% if question.user.image? %>
                 <%= image_tag question.user.image.mini.url %>
@@ -33,7 +38,6 @@
               <% end %>
               <%= question.user.name %>
             </p>
-            <%= link_to '詳細', question, class: "btn btn-info btn-lg" %>
           </div>
         </div>
       </div>
@@ -52,6 +56,6 @@
 <div class="container my-5">
   <%= link_to '新規質問作成', new_question_path, class: "btn btn-success btn-lg" %>
   <% unless user_signed_in? %>
-    <h5 class="my-2 font-italic text-muted">ログインするとコメントできます</h5>
+    <h5 class="my-2 font-italic text-muted">ログインするとコメントできます!</h5>
   <% end %>
 </div>

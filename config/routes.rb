@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root to: "home#top"
   get '/' => 'home#top'
   get '/about' => 'home#about'
+  get '/policy' => 'home#privacy_policy'
+  get '/terms' => 'home#terms'
   get 'users/show'
 
   resources :news

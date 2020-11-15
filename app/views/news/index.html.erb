@@ -15,10 +15,12 @@
 <%= will_paginate @newss, list_classes: %w(pagination justify-content-center), :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
 <% @newss.each do |news| %>
   <div class="row justify-content-around">
-    <div class="card text-center shadow-sm my-5 h-75" style="height: 300px;">
+    <div class="card text-center shadow-sm my-5 h-75" style="width: 800px;">
       <h5 class="card-header">タイトル：<%= news.title %></h5>
       <div class="card-body">
-        <h5 class="card-title"><%= news.content %></h5>
+        <h5 class="card-title">
+          <%= truncate(news.content, length: 30) %><br>
+        </h5>
         <p class="card-text text-right text-muted">投稿者：
           <% if User.find_by(id: news.user_id).image? %>
             <%= image_tag User.find_by(id: news.user_id).image.mini.url %>

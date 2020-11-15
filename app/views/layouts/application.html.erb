@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CareYou 介護情報Q&Aサイト</title>
+    <title>CareYou</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+    <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -11,7 +13,9 @@
   <body class="d-flex flex-column">
     <!-- ナビゲーションバー -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top">
-      <a class="navbar-brand" href="/">CareYou</a>
+      <a class="navbar-brand" href="/">
+        <img src="/favicon.ico" width="30" height="30" alt="logo" class="d-inline-block align-top" loading="lazy">CareYou
+      </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <small class="navbar-toggler-icon"></small>
       </button>
@@ -71,6 +75,7 @@
 
   <footer id="sticky-footer" class="mt-auto py-3 bg-light">
     <div class="container text-center">
+      <p><%= link_to "プライバシーポリシー", policy_path, class: "text-muted mx-2" %><%= link_to "利用規約", terms_path, class: "text-muted mx-2" %></p>
       <small class="text-muted">©︎ Permz 2020</small>
     </div>
   </footer>
