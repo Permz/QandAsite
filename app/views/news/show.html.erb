@@ -13,7 +13,11 @@
     <h5 class="card-header">タイトル：<%= @news.title %></h5>
     <div class="card-body">
       <h5 class="card-title"><%= @news.content %></h5>
-      <p class="card-text text-right text-muted">投稿者：
+      <div class="card-text text-center text-muted">
+        <p>投稿日時　<%= @news.updated_at.strftime("%Y年%m月%d日 %H時%m分") %></p>
+      </div>
+      <p class="card-text text-right text-muted">
+        投稿者：
         <% if @user.image? %>
           <%= image_tag @user.image.mini.url %>
         <% else %>
