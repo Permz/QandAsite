@@ -12,15 +12,25 @@
   <div class="card mb-3 shadow-sm">
     <div class="row no-gutters">
       <div class="col-md-4">
-        <%= image_tag "free-kaigo.jpeg", src: "src", class: "card-img", alt: "img", style: "width: 480px;" %>
+        <%= image_tag "free-kaigo.jpeg", class: "card-img ", alt: "介護", style: "width: 460px;" %>
       </div>
       <div class="col-md-8">
         <div class="card-body">
           <h5 class="card-title">CareYouとは</h5>
+          <p class="card-text">介護にまつわる疑問や質問を、</p>
+          <p class="card-text">オープンに聞くことができるQ&Aプラットフォームです。</p>
           <p class="card-text">介護に携わる方と共に、これからの介護を考えていきます。</p>
+          <p class="card-text">また、介護に関するニュースも配信しています。</p>
         </div>
       </div>
     </div>
+  </div>
+    <div class="container my-5">
+    <%= link_to "相談一覧", questions_path, class: "btn btn-info btn-lg mx-1" %>
+    <%= link_to "相談してみる", new_question_path, class: "btn btn-success btn-lg mx-1" %>
+  </div>
+    <div class="container mb-5">
+    <%= link_to "ニュース一覧", news_index_path, class: "btn btn-warning btn-lg mx-1" %>
   </div>
 </div>
 
