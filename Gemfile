@@ -47,6 +47,7 @@ gem 'breadcrumbs_on_rails'
 
 gem 'rails_admin-i18n'
 
+gem 'meta-tags'
 gem 'dotenv-rails'
 
 group :development, :test do
