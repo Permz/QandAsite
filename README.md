@@ -13,9 +13,9 @@ https://carey0u.net
 - 管理者ページ(gem: rails_admin)
 - アカウント停止機能
 - プロフィール画像アップロード機能(gem: carrierwave, rmagick)
-- 相談作成・閲覧機能
+- 相談作成・閲覧・削除機能
 - タグ作成・付与機能
-- コメント作成・閲覧機能
+- コメント作成・閲覧・削除機能
 - ベストコメント機能
 - ニュース記事作成・閲覧機能
 - お問い合わせ作成機能
@@ -31,5 +31,7 @@ https://carey0u.net
 - データベース: Amazaon RDS (Mysql Aurora)
 - コンテナ: Docker(v19.03.13), docker-compose(v1.27.4)
 - クラウドインフラ: AWS(vpc, ec2, rds, route53, Certificate Manager)
-- favicon.ico 作成(使用サイト: [Canva](www.canva.com), [エーオーシステム](ao-system.net)
+- favicon.ico の作成(使用サイト: [Canva](www.canva.com), [エーオーシステム](ao-system.net)
 ![CareYou](https://user-images.githubusercontent.com/68471488/99181158-0645f300-2770-11eb-9217-e1eebd3c4ef2.png)
+↑作成物
+
