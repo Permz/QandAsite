@@ -49,6 +49,10 @@ gem 'rails_admin-i18n'
 
 gem 'dotenv-rails'
 
+gem 'google-api-client', '~> 0.34'
+gem 'signet'
+gem 'google-analytics-rails', '1.1.1'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
