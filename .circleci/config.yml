@@ -19,7 +19,7 @@ jobs:
       # CircleCI に登録した秘密鍵を呼び出す
       - add_ssh_keys:
       # CircleCI に登録した環境変数を使って SSH
-      - run: ssh ${USER_NAME}@${HOST_NAME} 'cd /var/www/rails/QandAsite && git pull'
+      - run: ssh ${USER_NAME}@${HOST_NAME} 'cd /var/www/rails/QandAsite && git pull origin production'
  
 workflows:
   version: 2
@@ -32,7 +32,7 @@ workflows:
         requires:
           # deploy ジョブより先に build ジョブを実行しろ！
           - build
-        # main ブランチに push された場合のみ deploy ジョブを実行する
+        # production ブランチに push された場合のみ deploy ジョブを実行する
         filters:
           branches:
-            only: main
+            only: production
