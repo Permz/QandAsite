@@ -19,7 +19,7 @@ development:
   database: myapp_development
   username: root
   password: password
-  host: db
+  host: '127.0.0.1'
   port: 3306
 
 # Warning: The database defined as "test" will be erased and

@@ -13,19 +13,16 @@ jobs:
       # specify the version you desire here
       - image: circleci/ruby:2.7.1-node-browsers
         environment:
-          - BUNDLER_VERSION: 2.1.4
-          - RAILS_ENV: 'test'
-          - DB_USER: 'root'
-          - DB_HOST: '127.0.0.1'
+          - RAILS_ENV: test
+          - DB_HOST: 127.0.0.1
           - APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE: 'DontWarn'
           - TZ: 'Asia/Tokyo'
       - image: circleci/mysql:8.0.21
         command: |
           mysqld --default-authentication-plugin=mysql_native_password
         environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE: 'sample_test'
-          MYSQL_ROOT_PASSWORD: 'password'
+          - MYSQL_DATABASE: 'test'
+          - MYSQL_ROOT_PASSWORD: 'password'
 
     steps:
       - checkout
@@ -36,16 +33,6 @@ jobs:
             sudo apt-get update
             sudo apt-get install build-essential patch ruby-dev zlib1g-dev liblzma-dev
             sudo apt-get install -y lsb-release mariadb-client
-            curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
-            sudo echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
-            sudo apt-get update
-            sudo apt-get install -y yarn
-
-      - run:
-          name: Install dockerize
-          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
-          environment:
-            DOCKERIZE_VERSION: v0.6.1
 
       - run:
           name: Wait for DB
@@ -59,7 +46,7 @@ jobs:
 
       - run:
           name: Bundle Install
-          command: bundle check --path vendor/bundle || bundle install --path vendor/bundle --jobs 4 --retry 3
+          command: bundle check --path vendor/bundle || bundle install --path vendor/bundle --jobs=4 --retry=3
       - save_cache:
           name: Store bundle cache
           key: solos-bundle-{{ checksum "Gemfile.lock" }}
