@@ -12,6 +12,7 @@ jobs:
           - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
           - MYSQL_ROOT_HOST: '%'
           - COLLATION_SERVER: 'utf8mb4_bin'
+          - DEFAULT_AUTHENTICATION_PLUGIN: 'mysql_native_password'
 
     working_directory: ~/repo
 
