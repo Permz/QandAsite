@@ -21,9 +21,7 @@ class CommentsController < ApplicationController
   def destroy
     @question = Question.find(params[:question_id])
     question_comment = @question.comments.find(params[:id])
-    if question_comment.user != current_user
-        redirect_to request.referer
-    end
+    redirect_to request.referer if question_comment.user != current_user
     question_comment.destroy
     respond_to do |format|
       format.html { redirect_to request.referer, notice: 'コメント削除に成功しました' }
@@ -39,8 +37,6 @@ class CommentsController < ApplicationController
 
   def correct_user
     @comment = current_user.comments.find_by(id: params[:id])
-    unless @comment
-      redirect_to root_url
-    end
+    redirect_to root_url unless @comment
   end
 end

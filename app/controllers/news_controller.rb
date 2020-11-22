@@ -1,9 +1,9 @@
 class NewsController < ApplicationController
-  before_action :set_news, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:index, :show]
-  before_action :not_manager, only: [:new, :edit, :update, :destroy]
+  before_action :set_news, only: %i[show edit update destroy]
+  before_action :authenticate_user!, only: %i[index show]
+  before_action :not_manager, only: %i[new edit update destroy]
 
-  add_breadcrumb "ニュース一覧", :news_index_path
+  add_breadcrumb 'ニュース一覧', :news_index_path
 
   # GET /news
   # GET /news.json
@@ -14,7 +14,7 @@ class NewsController < ApplicationController
   # GET /news/1
   # GET /news/1.json
   def show
-    add_breadcrumb "ニュース詳細", :news_path
+    add_breadcrumb 'ニュース詳細', :news_path
     @user = User.find_by(id: @news.user_id)
   end
 
@@ -24,8 +24,7 @@ class NewsController < ApplicationController
   end
 
   # GET /news/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /news
   # POST /news.json
@@ -68,17 +67,18 @@ class NewsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_news
-      @news = News.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def news_params
-      params.require(:news).permit(:title, :content, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_news
+    @news = News.find(params[:id])
+  end
 
-    def not_manager
-      current_user.admin_flg == false
-    end
+  # Only allow a list of trusted parameters through.
+  def news_params
+    params.require(:news).permit(:title, :content, :user_id)
+  end
+
+  def not_manager
+    current_user.admin_flg == false
+  end
 end

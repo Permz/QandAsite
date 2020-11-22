@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
-  before_action :set_contact, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:show, :new]
+  before_action :set_contact, only: %i[show edit update destroy]
+  before_action :authenticate_user!, only: %i[show new]
 
   # GET /contacts
   # GET /contacts.json
@@ -10,13 +10,12 @@ class ContactsController < ApplicationController
 
   # GET /contacts/1
   # GET /contacts/1.json
-  def show
-  end
+  def show; end
 
   # GET /contacts/new
   def new
     @contact = Contact.new
-    add_breadcrumb "お問い合わせ", :new_contact_path
+    add_breadcrumb 'お問い合わせ', :new_contact_path
   end
 
   # POST /contacts
@@ -46,13 +45,14 @@ class ContactsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_contact
-      @contact = Contact.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def contact_params
-      params.require(:contact).permit(:title, :content, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_contact
+    @contact = Contact.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def contact_params
+    params.require(:contact).permit(:title, :content, :user_id)
+  end
 end

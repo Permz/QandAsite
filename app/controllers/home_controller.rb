@@ -1,17 +1,13 @@
 class HomeController < ApplicationController
-  
   def top
     @latest_news = News.last
   end
 
   def about
-    add_breadcrumb "概要", :about_path
+    add_breadcrumb '概要', :about_path
   end
 
-  def privacy_policy
-  end
+  def privacy_policy; end
 
-  def terms
-  end
-
+  def terms; end
 end
