@@ -75,7 +75,6 @@ jobs:
           command: |
             yarn upgrade
             bundle exec rails webpacker:install
-            yarn install --check-files
 
       - run:
           name: Rubocop
