@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="rspec" tests="10" skipped="0" failures="0" errors="0" time="1.298158" timestamp="2020-11-22T16:24:00+09:00" hostname="Permz.local">
+<testsuite name="rspec" tests="10" skipped="0" failures="0" errors="0" time="1.203102" timestamp="2020-11-22T18:15:16+09:00" hostname="Permz.local">
 <properties>
-<property name="seed" value="54734"/>
+<property name="seed" value="52733"/>
 </properties>
-<testcase classname="spec.models.users_spec" name="User バリデーション nameが空だとNG" file="./spec/models/users_spec.rb" time="0.113413"></testcase>
-<testcase classname="spec.models.users_spec" name="User バリデーション emailが空だとNG" file="./spec/models/users_spec.rb" time="0.005027"></testcase>
-<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが妥当な場合 リクエストが成功する" file="./spec/requests/devise_users_spec.rb" time="0.057025"></testcase>
-<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが妥当な場合 createが成功する" file="./spec/requests/devise_users_spec.rb" time="0.025249"></testcase>
-<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが妥当な場合 リダイレクトされる" file="./spec/requests/devise_users_spec.rb" time="0.025300"></testcase>
-<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが不正な場合 リクエストが成功する" file="./spec/requests/devise_users_spec.rb" time="0.927005"></testcase>
-<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが不正な場合 createが失敗する" file="./spec/requests/devise_users_spec.rb" time="0.041959"></testcase>
-<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが不正な場合 エラーが表示される" file="./spec/requests/devise_users_spec.rb" time="0.033642"></testcase>
-<testcase classname="spec.requests.users_autentications_spec" name="UserAuthentications GET #edit ログインしている場合 リクエストが成功する" file="./spec/requests/users_autentications_spec.rb" time="0.043837"></testcase>
-<testcase classname="spec.requests.users_autentications_spec" name="UserAuthentications GET #edit ゲストの場合 リダイレクトされる" file="./spec/requests/users_autentications_spec.rb" time="0.021337"></testcase>
+<testcase classname="spec.models.users_spec" name="User バリデーション nameが空だとNG" file="./spec/models/users_spec.rb" time="0.269937"></testcase>
+<testcase classname="spec.models.users_spec" name="User バリデーション emailが空だとNG" file="./spec/models/users_spec.rb" time="0.003799"></testcase>
+<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが妥当な場合 リクエストが成功する" file="./spec/requests/devise_users_spec.rb" time="0.064247"></testcase>
+<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが妥当な場合 createが成功する" file="./spec/requests/devise_users_spec.rb" time="0.025789"></testcase>
+<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが妥当な場合 リダイレクトされる" file="./spec/requests/devise_users_spec.rb" time="0.026988"></testcase>
+<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが不正な場合 リクエストが成功する" file="./spec/requests/devise_users_spec.rb" time="0.685515"></testcase>
+<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが不正な場合 createが失敗する" file="./spec/requests/devise_users_spec.rb" time="0.031272"></testcase>
+<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが不正な場合 エラーが表示される" file="./spec/requests/devise_users_spec.rb" time="0.032245"></testcase>
+<testcase classname="spec.requests.users_autentications_spec" name="UserAuthentications GET #edit ログインしている場合 リクエストが成功する" file="./spec/requests/users_autentications_spec.rb" time="0.042986"></testcase>
+<testcase classname="spec.requests.users_autentications_spec" name="UserAuthentications GET #edit ゲストの場合 リダイレクトされる" file="./spec/requests/users_autentications_spec.rb" time="0.016120"></testcase>
 </testsuite>

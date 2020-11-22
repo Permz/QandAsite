@@ -48,24 +48,23 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # ファイル名を変更し拡張子を同じにする
   def filename
-    super.chomp(File.extname(super)) + '.jpg'
+    "#{super.chomp(File.extname(super))} + .jpg"
   end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   # 日付で保存
   def filename
-    if original_filename.present?
-      time = Time.now
-      name = time.strftime('%Y%m%d%H%M%S') + '.jpg'
-      name.downcase
-    end
+    true if original_filename.present?
+
+    time = Time.now
+    name = "#{time.strftime('%Y%m%d%H%M%S')} + .jpg"
+    name.downcase
   end
 
   def auto
-    manipulate! do |image|
-      image.auto_orient
-    end
+    manipulate(&:auto_orient)
+    image.auto_orient
   end
 
   process :auto

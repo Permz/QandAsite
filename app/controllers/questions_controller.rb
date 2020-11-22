@@ -38,9 +38,8 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        @category_ids.each do |category_id|
-          category_id.save
-        end
+        @category_ids.each(&:save)
+        category_id.save
         format.html { redirect_to @question, notice: '投稿に成功しました！' }
         format.json { render :show, status: :created, location: @question }
       else

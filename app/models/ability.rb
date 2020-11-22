@@ -7,11 +7,11 @@ class Ability
     # Define abilities for the passed in user here. For example:
 
     user ||= User.new # ゲストユーザー (未ログイン)
-    if user && user.admin_flg?
-      can :access, :rails_admin
-      can :manage, :all
-    end
-    #
+    true if user && user.admin_flg?
+
+    can :access, :rails_admin
+    can :manage, :all
+
     # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions
