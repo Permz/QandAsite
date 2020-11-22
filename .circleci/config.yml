@@ -70,12 +70,6 @@ jobs:
           paths:
             - vendor/bundle
 
-      - run: 
-          name: Webpack Install
-          command: |
-            yarn upgrade
-            bundle exec rails webpacker:install
-
       - run:
           name: Rubocop
           command: bundle exec rubocop
