@@ -1,46 +1,76 @@
-version: 2.1
-orbs:
-  ruby: circleci/ruby@0.1.2 
-
+version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.7.1-node
-    executor: ruby/default
+      # specify the version you desire here
+      - image: circleci/ruby:2.7.1-node-browsers
+        environment:
+          - BUNDLER_VERSION: 2.1.4
+          - RAILS_ENV: 'test'
+      - image: circleci/mysql:5.7
+        environment:
+          - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          - MYSQL_ROOT_HOST: '%'
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/postgres:9.4
+
+    working_directory: ~/repo
+
     steps:
       - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
       - run:
-          name: Which bundler?
-          command: bundle -v
-      - run: bundle config set path 'vendor/bundle' && \
-             bundle install -j4
-      - run: apt-get update && apt-get install -y yarn && \
-             yarn upgrade && \
-             rails webpacker:install && \
-             yarn install --check-files
-             # deploy ジョブ: EC2 に SSH 接続して、デプロイを実行する
-  deploy:
-    machine:
-        image: circleci/classic:edge
-    steps:
-      - checkout
-      # CircleCI に登録した秘密鍵を呼び出す
-      - add_ssh_keys:
-      # CircleCI に登録した環境変数を使って SSH
-      - run: ssh ${USER_NAME}@${HOST_NAME} 'cd /var/www/rails/QandAsite && git pull'
- 
-workflows:
-  version: 2
-  # build_and_deploy ジョブ: 一番最初に呼ばれるジョブ
-  build_and_deploy:
-    # build ジョブと deploy ジョブを呼び出す
-    jobs:
-      - build
-      - deploy:
-        requires:
-          # deploy ジョブより先に build ジョブを実行しろ！
-          - build
-        # production ブランチに push された場合のみ deploy ジョブを実行する
-        filters:
-          branches:
-            only: production
+          name: install dependencies
+          command: |
+            gem install bundler -v 2.1.4
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+# database.ymlとdatabase.yml.ciを入れ替える記述。
+      - run: mv config/database.yml.ci config/database.yml 
+
+      # Database setup
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+
+# rubocopを走らせる記述。
+      - run:
+          name: Rubocop
+          command: bundle exec rubocop
+
+# rspecを走らせる記述。
+      # run tests!
+      - run:
+          name: run tests
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
+              circleci tests split --split-by=timings)"
+
+            bundle exec rspec \
+              --format progress \
+              --format RspecJunitFormatter \
+              --out /tmp/test-results/rspec.xml \
+              --format progress \
+              $TEST_FILES
+
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
