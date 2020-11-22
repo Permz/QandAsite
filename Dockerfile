@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     libpq-dev \
     nodejs \
-    default-mysql-client \
+    mariadb-client \
     sudo \
     vim && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
@@ -21,7 +21,7 @@ COPY Gemfile Gemfile.lock /app/
 
 COPY . /app
 
-RUN bundle && \
+RUN bundle install -j4 && \
     yarn upgrade && \
     rails webpacker:install && \
     yarn install --check-files
