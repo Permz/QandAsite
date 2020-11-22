@@ -17,5 +17,14 @@ module QA
     config.i18n.default_locale = :ja
     # i18nの複数ロケールファイルが読み込まれるようpathを通す
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+
+    # RSpec
+    config.generators do |g|
+      g.test_framework :rspec, 
+            view_specs: false, 
+            helper_specs: false, 
+            controller_specs: false, 
+            routing_specs: false
+    end
   end
 end

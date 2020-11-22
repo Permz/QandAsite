@@ -40,6 +40,11 @@
             <% end %>
           </div>
         </div>
+      <% elsif @question.best_answer_id == nil %>
+        <div class="container my-4">
+          <h3 class="font-italic text-muted">↓　コメントしてみましょう！　↓</h3>
+        </div>
+      <% else %>
       <% end %>
     <% end %>
   </div>

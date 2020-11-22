@@ -14,20 +14,26 @@
       <h5 class="card-header">タイトル：<%= @question.title %></h5>
       <div class="card-body">
         <h5 class="card-title"><%= @question.content %></h5>
-        <p class="card-text text-right text-muted">投稿者：
-          <% if @user.image? %>
-            <%= image_tag @user.image.mini.url %>
-          <% else %>
-            <p>画像がありません</p>
-          <% end %>
-          <%= @question.user.name %></p>
+        <div class="card-text text-center text-muted">
+          <p>投稿日時　<%= @question.updated_at.strftime("%Y年%m月%d日 %H時%m分") %></p>
+        </div>
+        <hr>
         <div class="container my-3">
           <% @question.categories.each do |category| %>
             <h5><%= link_to category.name, category_path(id: category.id), class: "badge badge-pill badge-secondary" %></h5>
           <% end %>
         </div>
+        <div class="card-text text-right text-muted">
+          <p>投稿者 
+            <% if @user.image? %>
+              <%= image_tag @user.image.mini.url %>
+            <% else %>
+              <p class="font-italic">画像がありません</p>
+            <% end %>
+            <%= @question.user.name %>
+          </p>
+        </div>
         <% if current_user.id == @question.user_id %>
-          <hr>
           <%= link_to_unless @question.best_answer_id, "編集", edit_question_path(@question), class: "btn btn-success mx-2" %>
           <%= link_to_unless @question.best_answer_id, "削除", @question, method: :delete, class: "btn btn-danger mx-2", data: { confirm: '削除しますか?' } %>
         <% end %>

@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
+  validates :name, presence: true
+  validates :email, presence: true
   validates :introduction, presence: false, length: { maximum: 100 } #100文字制限
 
   mount_uploader :image, ImageUploader
