@@ -1,46 +1,102 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@0.1.2 
+  aws-cli: circleci/aws-cli@0.1.13
+executors:
+  builder:
+    docker:
+      - image: circleci/buildpack-deps
+
+commands:
+  init:
+    steps:
+      - checkout
+      - aws-cli/install
+      - install_ecs-cli
+      - setup_remote_docker
+  install_ecs-cli:
+    steps:
+      - run:
+          name: Install ECS-CLI
+          command: |
+            sudo curl -o /usr/local/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-linux-amd64-latest
+            sudo chmod +x /usr/local/bin/ecs-cli
 
 jobs:
   build:
-    docker:
-      - image: circleci/ruby:2.7.1-node
-    executor: ruby/default
+    executor: builder
     steps:
-      - checkout
+      - init
       - run:
-          name: Which bundler?
-          command: bundle -v
-      - run: bundle config set path 'vendor/bundle' && \
-             bundle install -j4
-      - run: apt-get update && apt-get install -y yarn && \
-             yarn upgrade && \
-             rails webpacker:install && \
-             yarn install --check-files
-             # deploy ジョブ: EC2 に SSH 接続して、デプロイを実行する
+          name: Build application Docker image
+          command: |
+            docker build -f build.Dockerfile --rm=false -t rails-sample-app-build:latest .
+      - run:
+          name: Save image
+          command: |
+            mkdir -p /tmp/docker
+            docker save rails-sample-app-build:latest -o /tmp/docker/image
+      - persist_to_workspace:
+          root: /tmp/docker
+          paths:
+            - image
   deploy:
-    machine:
-        image: circleci/classic:edge
+    executor: builder
     steps:
-      - checkout
-      # CircleCI に登録した秘密鍵を呼び出す
-      - add_ssh_keys:
-      # CircleCI に登録した環境変数を使って SSH
-      - run: ssh ${USER_NAME}@${HOST_NAME} 'cd /var/www/rails/QandAsite && git pull'
- 
+      - init
+      - attach_workspace:
+          at: /tmp/docker
+      - run: docker load -i /tmp/docker/image
+      - run:
+          name: Assets precompile and Push Docker image
+          command: |
+            docker build -f assets.Dockerfile --build-arg RAILS_MASTER_KEY=${RAILS_MASTER_KEY} --rm=false -t rails-sample-app-build:latest .
+      - run:
+          name: Push Docker image
+          command: |
+            ecs-cli push rails-sample-app-build:latest
+      - run:
+          name: ECS Config
+          command: |
+            ecs-cli configure \
+            --cluster rails-sample-${CIRCLE_BRANCH} \
+            --region ${AWS_DEFAULT_REGION} \
+            --config-name rails-sample-${CIRCLE_BRANCH}
+      - run:
+          name: migrate deploy
+          command: |
+            ecs-cli compose \
+            --file ecs/${CIRCLE_BRANCH}/migrate/docker-compose.yml \
+            --ecs-params ecs/${CIRCLE_BRANCH}/migrate/ecs-params.yml \
+            --project-name rails-sample-${CIRCLE_BRANCH}-migrate \
+            up \
+            --launch-type EC2 \
+            --create-log-groups \
+            --cluster-config rails-sample-${CIRCLE_BRANCH}
+      - run:
+          name: Puma + Nginx deploy
+          command: |
+            ecs-cli compose \
+            --file ecs/${CIRCLE_BRANCH}/app/docker-compose.yml \
+            --ecs-params ecs/${CIRCLE_BRANCH}/app/ecs-params.yml \
+            --project-name rails-sample-${CIRCLE_BRANCH}-app \
+            service up \
+            --container-name nginx \
+            --container-port 80 \
+            --target-group-arn ${TARGET_GROUP_ARN} \
+            --timeout 0 \
+            --launch-type EC2 \
+            --create-log-groups \
+            --cluster-config rails-sample-${CIRCLE_BRANCH}
+
 workflows:
   version: 2
-  # build_and_deploy ジョブ: 一番最初に呼ばれるジョブ
-  build_and_deploy:
-    # build ジョブと deploy ジョブを呼び出す
+  build-deploy:
     jobs:
       - build
       - deploy:
-        requires:
-          # deploy ジョブより先に build ジョブを実行しろ！
-          - build
-        # production ブランチに push された場合のみ deploy ジョブを実行する
-        filters:
-          branches:
-            only: production
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - production
