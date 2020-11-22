@@ -32,8 +32,32 @@ https://carey0u.net
 - コンテナ: Docker(v19.03.13), docker-compose(v1.27.4)
 - クラウドインフラ: AWS(vpc, ec2, rds, route53, Certificate Manager)
 ↓インフラ構築図
+
 ![infra](https://user-images.githubusercontent.com/68471488/99671374-4cbf8880-2ab5-11eb-9452-fe16e3332c21.jpg)
+
 - favicon.ico の作成(使用サイト: [Canva](https://www.canva.com/), [エーオーシステム](https://ao-system.net/favicon/))
 ↓作成物
+
 ![CareYou](https://user-images.githubusercontent.com/68471488/99181158-0645f300-2770-11eb-9217-e1eebd3c4ef2.png)
 
+# ローカル環境構築
+
+以下を実行することで、ローカル環境で確認ができます。
+ターミナルで以下を実行。
+```shell:ターミナル
+git clone -b dockerize https://github.com/Permz/QandAsite.git
+```
+
+その後、
+
+`docker-compose build`
+`docker-compose up`
+を実行。ターミナルを別タブで開き。
+
+`docker-compose exec app bash`
+にてコンテナ内に入る。
+
+`rails db:create`
+`rails db:migrate`
+`rails db:seed`
+を順に実行。ブラウザを開き、`localhost:19802`に接続。
