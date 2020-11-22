@@ -1,74 +1,64 @@
 version: 2
-general:
-  branches:
-    only:
-      - main
-      - develop
-      - /^test.*/
-      - circleci
-
 jobs:
   build:
     docker:
-      # specify the version you desire here
-      - image: circleci/ruby:2.7.1-node-browsers
-        environment:
-          - RAILS_ENV: test
-          - DB_HOST: 127.0.0.1
-          - APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE: 'DontWarn'
-          - TZ: 'Asia/Tokyo'
-      - image: circleci/mysql:8.0.21
-        command: |
-          mysqld --default-authentication-plugin=mysql_native_password
-        environment:
-          - MYSQL_DATABASE: 'test'
-          - MYSQL_ROOT_PASSWORD: 'password'
+    - image: circleci/ruby:2.7.1-node-browsers
+      environment:
+        - BUNDLER_VERSION: 2.1.4
+        - RAILS_ENV: 'test'
+    - image: circleci/mysql:8.0.21
+      command: |
+        mysqld --default-authentication-plugin=mysql_native_password
+      environment:
+        - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+        - MYSQL_ROOT_HOST: '127.0.0.1'
+
+    working_directory: ~/my_app
 
     steps:
       - checkout
 
-      - run:
-          name: Install System Dependencies
-          command: |
-            sudo apt-get update
-            sudo apt-get install build-essential patch ruby-dev zlib1g-dev liblzma-dev
-            sudo apt-get install -y lsb-release mariadb-client
-
-      - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 3m
-
       - restore_cache:
-          name: Restore bundle cache
           keys:
-            - solos-bundle-{{ checksum "Gemfile.lock" }}
-            - solos-bundle-
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          - v1-dependencies-
 
       - run:
-          name: Bundle Install
-          command: bundle check --path vendor/bundle || bundle install --path vendor/bundle --jobs=4 --retry=3
-      - save_cache:
-          name: Store bundle cache
-          key: solos-bundle-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-
-      - run:
-          name: Rubocop
-          command: bundle exec rubocop
-
-      - store_artifacts:
-          path: doc
-
-      - run:
-          name: Set up DB
+          name: install dependencies
           command: |
-            bundle exec rake db:create
-            bundle exec rake db:schema:load
+            gem install bundler -v 2.1.4
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
 
+      - save_cache:
+          paths:
+          - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      # Database setup
       - run:
-          name: RSpec
-          command: bundle exec rspec
+          name: Databasesetup
+          command: |
+             bundle exec rake db:create
+             bundle exec rake db:schema:load
 
+      # run tests!
+      - run:
+          name: Run rspec
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
+              circleci tests split --split-by=timings)"
+
+            bundle exec rspec \
+              --format progress \
+              --format RspecJunitFormatter \
+              --out /tmp/test-results/rspec.xml \
+              --format progress \
+              $TEST_FILES
+
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
       - store_artifacts:
-          path: coverage
+          path: /tmp/test-results
+          destination: test-results
