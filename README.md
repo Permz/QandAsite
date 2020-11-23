@@ -52,7 +52,7 @@ git clone -b dockerize https://github.com/Permz/QandAsite.git
 
 `docker-compose build`
 `docker-compose up`
-を実行。ターミナルを別タブで開き。
+を実行。ターミナルを別タブで開き、
 
 `docker-compose exec app bash`
 にてコンテナ内に入る。

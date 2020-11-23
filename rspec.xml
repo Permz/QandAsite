@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="rspec" tests="11" skipped="0" failures="1" errors="0" time="1.147874" timestamp="2020-11-23T15:03:54+09:00" hostname="Permz.local">
+<testsuite name="rspec" tests="19" skipped="0" failures="2" errors="0" time="1.263549" timestamp="2020-11-23T21:25:43+09:00" hostname="Permz.local">
 <properties>
-<property name="seed" value="56610"/>
+<property name="seed" value="36321"/>
 </properties>
-<testcase classname="spec.models.questions_spec" name="Question titleとcontentが入っていれば有効であること" file="./spec/models/questions_spec.rb" time="0.106679"><failure message="expected #&lt;Question id: nil, title: &quot;hoge&quot;, content: &quot;hogehoge&quot;, user_id: nil, created_at: nil, updated_at: nil, best_answer_id: nil&gt; to be valid, but got errors: Contentは10文字以上で入力してください" type="RSpec::Expectations::ExpectationNotMetError">Failure/Error: expect(question).to be_valid
-  expected #&lt;Question id: nil, title: &quot;hoge&quot;, content: &quot;hogehoge&quot;, user_id: nil, created_at: nil, updated_at: nil, best_answer_id: nil&gt; to be valid, but got errors: Contentは10文字以上で入力してください
-./spec/models/questions_spec.rb:9:in `block (2 levels) in &lt;main&gt;&apos;</failure></testcase>
-<testcase classname="spec.models.users_spec" name="User バリデーション nameが空だとNG" file="./spec/models/users_spec.rb" time="0.019435"></testcase>
-<testcase classname="spec.models.users_spec" name="User バリデーション emailが空だとNG" file="./spec/models/users_spec.rb" time="0.003503"></testcase>
-<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが妥当な場合 リクエストが成功する" file="./spec/requests/devise_users_spec.rb" time="0.052404"></testcase>
-<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが妥当な場合 createが成功する" file="./spec/requests/devise_users_spec.rb" time="0.027664"></testcase>
-<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが妥当な場合 リダイレクトされる" file="./spec/requests/devise_users_spec.rb" time="0.025050"></testcase>
-<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが不正な場合 リクエストが成功する" file="./spec/requests/devise_users_spec.rb" time="0.772723"></testcase>
-<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが不正な場合 createが失敗する" file="./spec/requests/devise_users_spec.rb" time="0.034980"></testcase>
-<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが不正な場合 エラーが表示される" file="./spec/requests/devise_users_spec.rb" time="0.031683"></testcase>
-<testcase classname="spec.requests.users_autentications_spec" name="UserAuthentications GET #edit ログインしている場合 リクエストが成功する" file="./spec/requests/users_autentications_spec.rb" time="0.051046"></testcase>
-<testcase classname="spec.requests.users_autentications_spec" name="UserAuthentications GET #edit ゲストの場合 リダイレクトされる" file="./spec/requests/users_autentications_spec.rb" time="0.018967"></testcase>
+<testcase classname="spec.models.newses_spec" name="News validation is valid with a title and content" file="./spec/models/newses_spec.rb" time="0.105906"><failure message="expected #&lt;News id: nil, title: &quot;test&quot;, content: &quot;some content&quot;, user_id: 1, created_at: nil, updated_at: nil&gt; to be valid, but got errors: Userを入力してください" type="RSpec::Expectations::ExpectationNotMetError">Failure/Error: expect(@news).to be_valid
+  expected #&lt;News id: nil, title: &quot;test&quot;, content: &quot;some content&quot;, user_id: 1, created_at: nil, updated_at: nil&gt; to be valid, but got errors: Userを入力してください
+./spec/models/newses_spec.rb:11:in `block (3 levels) in &lt;main&gt;&apos;</failure></testcase>
+<testcase classname="spec.models.questions_spec" name="Question validation is valid with a title and content" file="./spec/models/questions_spec.rb" time="0.024045"><failure message="expected #&lt;Question id: nil, title: &quot;test&quot;, content: &quot;some content&quot;, user_id: 1, created_at: nil, updated_at: nil, best_answer_id: nil&gt; to be valid, but got errors: Userを入力してください" type="RSpec::Expectations::ExpectationNotMetError">Failure/Error: expect(@question).to be_valid
+  expected #&lt;Question id: nil, title: &quot;test&quot;, content: &quot;some content&quot;, user_id: 1, created_at: nil, updated_at: nil, best_answer_id: nil&gt; to be valid, but got errors: Userを入力してください
+./spec/models/questions_spec.rb:12:in `block (3 levels) in &lt;main&gt;&apos;</failure></testcase>
+<testcase classname="spec.models.questions_spec" name="Question validation is invalid without a title" file="./spec/models/questions_spec.rb" time="0.006728"></testcase>
+<testcase classname="spec.models.questions_spec" name="Question validation is invalid without an email address" file="./spec/models/questions_spec.rb" time="0.007166"></testcase>
+<testcase classname="spec.models.questions_spec" name="Question validation is invalid without a user" file="./spec/models/questions_spec.rb" time="0.006150"></testcase>
+<testcase classname="spec.models.users_spec" name="User validation is valid with a name, email, and password" file="./spec/models/users_spec.rb" time="0.004421"></testcase>
+<testcase classname="spec.models.users_spec" name="User validation is invalid without a name" file="./spec/models/users_spec.rb" time="0.007069"></testcase>
+<testcase classname="spec.models.users_spec" name="User validation is invalid without an email address" file="./spec/models/users_spec.rb" time="0.005231"></testcase>
+<testcase classname="spec.models.users_spec" name="User validation is invalid without a password" file="./spec/models/users_spec.rb" time="0.006742"></testcase>
+<testcase classname="spec.models.users_spec" name="User validation is invalid with a duplicate email address" file="./spec/models/users_spec.rb" time="0.012829"></testcase>
+<testcase classname="spec.models.users_spec" name="User validation is invalid with a duplicate name" file="./spec/models/users_spec.rb" time="0.011144"></testcase>
+<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが妥当な場合 リクエストが成功する" file="./spec/requests/devise_users_spec.rb" time="0.059112"></testcase>
+<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが妥当な場合 createが成功する" file="./spec/requests/devise_users_spec.rb" time="0.024283"></testcase>
+<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが妥当な場合 リダイレクトされる" file="./spec/requests/devise_users_spec.rb" time="0.024605"></testcase>
+<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが不正な場合 リクエストが成功する" file="./spec/requests/devise_users_spec.rb" time="0.813115"></testcase>
+<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが不正な場合 createが失敗する" file="./spec/requests/devise_users_spec.rb" time="0.039543"></testcase>
+<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが不正な場合 エラーが表示される" file="./spec/requests/devise_users_spec.rb" time="0.035998"></testcase>
+<testcase classname="spec.requests.users_autentications_spec" name="UserAuthentications GET #edit ログインしている場合 リクエストが成功する" file="./spec/requests/users_autentications_spec.rb" time="0.043807"></testcase>
+<testcase classname="spec.requests.users_autentications_spec" name="UserAuthentications GET #edit ゲストの場合 リダイレクトされる" file="./spec/requests/users_autentications_spec.rb" time="0.019469"></testcase>
 </testsuite>
