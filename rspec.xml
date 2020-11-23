@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="rspec" tests="11" skipped="0" failures="1" errors="0" time="1.147874" timestamp="2020-11-23T15:03:54+09:00" hostname="Permz.local">
+<properties>
+<property name="seed" value="56610"/>
+</properties>
+<testcase classname="spec.models.questions_spec" name="Question titleとcontentが入っていれば有効であること" file="./spec/models/questions_spec.rb" time="0.106679"><failure message="expected #&lt;Question id: nil, title: &quot;hoge&quot;, content: &quot;hogehoge&quot;, user_id: nil, created_at: nil, updated_at: nil, best_answer_id: nil&gt; to be valid, but got errors: Contentは10文字以上で入力してください" type="RSpec::Expectations::ExpectationNotMetError">Failure/Error: expect(question).to be_valid
+  expected #&lt;Question id: nil, title: &quot;hoge&quot;, content: &quot;hogehoge&quot;, user_id: nil, created_at: nil, updated_at: nil, best_answer_id: nil&gt; to be valid, but got errors: Contentは10文字以上で入力してください
+./spec/models/questions_spec.rb:9:in `block (2 levels) in &lt;main&gt;&apos;</failure></testcase>
+<testcase classname="spec.models.users_spec" name="User バリデーション nameが空だとNG" file="./spec/models/users_spec.rb" time="0.019435"></testcase>
+<testcase classname="spec.models.users_spec" name="User バリデーション emailが空だとNG" file="./spec/models/users_spec.rb" time="0.003503"></testcase>
+<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが妥当な場合 リクエストが成功する" file="./spec/requests/devise_users_spec.rb" time="0.052404"></testcase>
+<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが妥当な場合 createが成功する" file="./spec/requests/devise_users_spec.rb" time="0.027664"></testcase>
+<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが妥当な場合 リダイレクトされる" file="./spec/requests/devise_users_spec.rb" time="0.025050"></testcase>
+<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが不正な場合 リクエストが成功する" file="./spec/requests/devise_users_spec.rb" time="0.772723"></testcase>
+<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが不正な場合 createが失敗する" file="./spec/requests/devise_users_spec.rb" time="0.034980"></testcase>
+<testcase classname="spec.requests.devise_users_spec" name="UserAuthentications POST #create パラメータが不正な場合 エラーが表示される" file="./spec/requests/devise_users_spec.rb" time="0.031683"></testcase>
+<testcase classname="spec.requests.users_autentications_spec" name="UserAuthentications GET #edit ログインしている場合 リクエストが成功する" file="./spec/requests/users_autentications_spec.rb" time="0.051046"></testcase>
+<testcase classname="spec.requests.users_autentications_spec" name="UserAuthentications GET #edit ゲストの場合 リダイレクトされる" file="./spec/requests/users_autentications_spec.rb" time="0.018967"></testcase>
+</testsuite>
