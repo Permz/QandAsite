@@ -31,9 +31,13 @@ https://carey0u.net
 - データベース: Amazaon RDS (Mysql Aurora)
 - コンテナ: Docker(v19.03.13), docker-compose(v1.27.4)
 - クラウドインフラ: AWS(vpc, ec2, rds, route53, Certificate Manager)
+
 ↓インフラ構築図
 
 ![infra](https://user-images.githubusercontent.com/68471488/99671374-4cbf8880-2ab5-11eb-9452-fe16e3332c21.jpg)
+
+↓詳細構造
+![app_architecture](https://user-images.githubusercontent.com/68471488/102298954-732df200-3f95-11eb-8831-fe9ecfc95352.png)
 
 - favicon.ico の作成(使用サイト: [Canva](https://www.canva.com/), [エーオーシステム](https://ao-system.net/favicon/))
 ↓作成物
@@ -43,7 +47,8 @@ https://carey0u.net
 # ローカル環境構築
 
 以下を実行することで、ローカル環境で確認ができます。
-ターミナルで以下を実行。
+
+ターミナルで以下を実行します。
 ```shell:ターミナル
 git clone -b dockerize https://github.com/Permz/QandAsite.git
 ```
@@ -52,12 +57,17 @@ git clone -b dockerize https://github.com/Permz/QandAsite.git
 
 `docker-compose build`
 `docker-compose up`
-を実行。ターミナルを別タブで開き、
 
+を実行します。
+ターミナルを別タブで開き、
+
+`cd QandAsite`
 `docker-compose exec app bash`
-にてコンテナ内に入る。
+にてコンテナ内に入リます。
 
 `rails db:create`
 `rails db:migrate`
 `rails db:seed`
-を順に実行。ブラウザを開き、`localhost:19802`に接続。
+を順に実行します。
+
+ブラウザを開き、`localhost:19802`に接続します。
